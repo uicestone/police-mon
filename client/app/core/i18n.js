@@ -28,12 +28,12 @@
             suffix: '.json'
         });
 
-        $translateProvider.preferredLanguage('en');
+        $translateProvider.preferredLanguage('zh');
         $translateProvider.useSanitizeValueStrategy(null);
     }
 
     function LangCtrl($scope, $translate) {
-        $scope.lang = 'English';
+        $scope.lang = '中文';
         $scope.setLang = setLang;
         $scope.getFlag = getFlag;
 
