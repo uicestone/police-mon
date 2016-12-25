@@ -31,8 +31,8 @@
             });
 
             $urlRouterProvider
-                .when('/', '/dashboard')
-                .otherwise('/dashboard');
+                .when('', '/dashboard')
+                .otherwise('/page/404');
 
 
             $stateProvider.state('dashboard', {
