@@ -1,0 +1,67 @@
+<div class="page">
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h2 class="section-header">{{ suspect.name }}</h2>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body ui-angular-wizard">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                        <div layout-padding>
+                            <form name="enrollment">
+                            <div layout layout-sm="column">
+                                <md-input-container flex>
+                                <label>马夹编号</label>
+                                <md-select ng-model="suspect.number" required>
+                                    <md-option ng-repeat="value in [1,2,3,4,5,6,7,8,9,10]">
+                                    {{ value }}
+                                    </md-option>
+                                </md-select>
+                                </md-input-container>
+                                <md-input-container flex>
+                                <label>健康状况</label>
+                                <md-select ng-model="suspect.healthy">
+                                    <md-option ng-repeat="value in [1,2,3,4,5]">{{ value }}</md-option>
+                                </md-select>
+                                </md-input-container>
+                                <md-input-container flex>
+                                <label>危险程度</label>
+                                <md-select ng-model="suspect.aggresivity">
+                                    <md-option ng-repeat="value in [1,2,3,4,5]">
+                                    {{ value }}
+                                    </md-option>
+                                </md-select>
+                                </md-input-container>
+                            </div>
+                            <div layout layout-sm="column">
+                                <md-input-container>
+                                <label>姓名</label>
+                                <input ng-model="suspect.name">
+                                </md-input-container>
+                                <md-input-container>
+                                <label>姓名</label>
+                                <input ng-model="suspect.name">
+                                </md-input-container>
+                                <md-input-container flex>
+                                <label>身份证号</label>
+                                <input ng-model="suspect.identity">
+                                </md-input-container>
+                            </div>
+                            <md-input-container class="md-block">
+                                <label>备注</label>
+                                <textarea ng-model="suspect.remark" columns="1"></textarea>
+                            </md-input-container>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="ui-wizard-actions">
+                        <md-button type="submit" class="md-raised btn-w-md md-primary">{{ 'WAIT' | translate}}</md-button>
+                        <md-button type="submit" class="md-raised btn-w-md md-warn" ng-click="goTo('WAKE')">{{ 'WAKE' | translate }}</md-button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

@@ -111,5 +111,24 @@
     "WORDCLOUD": "词云",
     "COMBINATION": "溷合",
     "FUNNEL": "漏斗",
-    "THEMES": "主题"
+    "THEMES": "主题",
+
+    "SUSPECT": "嫌疑对象",
+
+    "ENROLLMENT": "入所登记",
+    "ENROLLING": "入所登记中",
+    "WAIT": "等候讯（询）问",
+    "WAITING": "等候中",
+    "WAKE": "醒酒",
+    "WAKING_UP": "醒酒中",
+    "DETENTION": "候问看管",
+    "DETENTION_APPLY": "申请使用候问室",
+    "DETENTION_APPROVE": "批准使用候问室",
+    "IN_DETENTION": "看管等候中",
+    "TRIAL":"讯（询）问",
+    "TRIALING": "询讯问中",
+    "LEAVE": "离所登记",
+    "LEAVE_APPLY": "申请离所",
+    "TEMP_LEAVE": "临时离所",
+    "FINISH": "结束"
 }

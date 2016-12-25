@@ -6,6 +6,7 @@
             var routes, setRoutes;
 
             routes = [
+                'suspect/list', 'suspect/wizard', 'station/map',
                 'ui/cards', 'ui/typography', 'ui/buttons', 'ui/icons', 'ui/grids', 'ui/widgets', 'ui/components', 'ui/timeline', 'ui/lists', 'ui/pricing-tables',
                 'map/maps',
                 'table/static', 'table/dynamic', 'table/responsive',
