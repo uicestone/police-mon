@@ -3,7 +3,7 @@
 
     <div class="row ui-section">
     <div class="col-lg-8 clearfix">
-        <h2 class="section-header">Dynamic Table</h2>
+        <h2 class="section-header">嫌疑人员检索</h2>
     </div>
     <div class="col-md-12">
         <section class="panel panel-default table-dynamic">
@@ -12,7 +12,7 @@
             <div class="col-sm-4 col-xs-6">
                 <form>
                 <input type="text"
-                     placeholder="Search..."
+                     placeholder="派出所，姓名，状态，入所事由，离所事由……"
                      class="form-control"
                      data-ng-model="searchKeywords"
                      data-ng-keyup="search()">
@@ -20,7 +20,7 @@
             </div>
             <div class="col-sm-3 col-xs-6 filter-result-info">
                 <span>
-                Showing {{filteredStores.length}}/{{stores.length}} entries
+                显示 {{filteredStores.length}}/{{stores.length}} 条
                 </span>                
             </div>
             </div>
@@ -30,7 +30,16 @@
             <thead>
             <tr>
                 <th><div class="th">
-                Store Name
+                派出所
+                <span class="fa fa-angle-up"
+                    data-ng-click=" order('station') "
+                    data-ng-class="{active: row == 'station'}"></span>
+                <span class="fa fa-angle-down"
+                    data-ng-click=" order('-station') "
+                    data-ng-class="{active: row == '-station'}"></span>
+                </div></th>
+                <th><div class="th">
+                姓名
                 <span class="fa fa-angle-up"
                     data-ng-click=" order('name') "
                     data-ng-class="{active: row == 'name'}"></span>
@@ -39,40 +48,31 @@
                     data-ng-class="{active: row == '-name'}"></span>
                 </div></th>
                 <th><div class="th">
-                Price
+                入所事由
                 <span class="fa fa-angle-up"
-                    data-ng-click=" order('price') "
-                    data-ng-class="{active: row == 'price'}"></span>
+                    data-ng-click=" order('source') "
+                    data-ng-class="{active: row == 'source'}"></span>
                 <span class="fa fa-angle-down"
-                    data-ng-click=" order('-price') "
-                    data-ng-class="{active: row == '-price'}"></span>
+                    data-ng-click=" order('-source') "
+                    data-ng-class="{active: row == '-source'}"></span>
                 </div></th>
                 <th><div class="th">
-                Sales (in 7 days)
+                离所事由
                 <span class="fa fa-angle-up"
-                    data-ng-click=" order('sales') "
-                    data-ng-class="{active: row == 'sales'}"></span>
+                    data-ng-click=" order('status') "
+                    data-ng-class="{active: row == 'status'}"></span>
                 <span class="fa fa-angle-down"
-                    data-ng-click=" order('-sales') "
-                    data-ng-class="{active: row == '-sales'}"></span>
-                </div></th>
-                <th><div class="th">
-                Rating
-                <span class="fa fa-angle-up"
-                    data-ng-click=" order('rating') "
-                    data-ng-class="{active: row == 'rating'}"></span>
-                <span class="fa fa-angle-down"
-                    data-ng-click=" order('-rating') "
-                    data-ng-class="{active: row == '-rating'}"></span>
+                    data-ng-click=" order('-status') "
+                    data-ng-class="{active: row == '-status'}"></span>
                 </div></th>
             </tr>
             </thead>
             <tbody>
             <tr data-ng-repeat="store in currentPageStores">
+                <td>{{store.station}}</td>
                 <td>{{store.name}}</td>
-                <td>{{store.price}}</td>
-                <td>{{store.sales}}</td>
-                <td>{{store.rating}}</td>
+                <td>{{store.source}}</td>
+                <td>{{store.status}}</td>
             </tr>
             </tbody>
         </table>
@@ -81,12 +81,12 @@
             <div class="row">
             <div class="col-md-6 page-num-info">
                 <span>
-                Show 
+                每页显示 
                 <select data-ng-model="numPerPage"
                     data-ng-options="num for num in numPerPageOpt"
                     data-ng-change="onNumPerPageChange()">
                 </select> 
-                entries per page
+                条
                 </span>
             </div>
             <div class="col-md-6 text-right pagination-container">
@@ -97,6 +97,7 @@
                     ng-change="select(currentPage)"
                     items-per-page="numPerPage"
                     rotate="false"
+                    first-text="&laquo;" last-text="&raquo;"
                     previous-text="&lsaquo;" next-text="&rsaquo;"
                     boundary-links="true"></uib-pagination>
             </div>

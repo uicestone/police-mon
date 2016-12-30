@@ -16,7 +16,7 @@
                 show: true,
                 x: 'right',
                 y: 'top',
-                data: ['WOM', 'Viral', 'Paid']
+                data: ['刑事案件', '行政案件']
             },            
             grid: {
                 x: 40,
@@ -80,25 +80,9 @@
                 }
             ],
             series: [
+                
                 {
-                    name:'WOM',
-                    type:'bar',
-                    clickable: false,
-                    itemStyle: {
-                        normal: {
-                            color: $scope.color.gray
-                        },
-                        emphasis: {
-                            color: 'rgba(237,240,241,.7)'
-                        }
-                    },
-                    barCategoryGap: '50%',
-                    data:[75,62,45,60,73,50,31,56,70,63,49,72,76,67,46,51,69,59,85,67,56],
-                    legendHoverLink: false,
-                    z: 2
-                },
-                {
-                    name:'Viral',
+                    name:'刑事案件',
                     type:'line',
                     smooth:true,
                     itemStyle: {
@@ -116,7 +100,7 @@
                     z: 3
                 },
                 {
-                    name:'Paid',
+                    name:'行政案件',
                     type:'line',
                     smooth:true,
                     itemStyle: {
@@ -392,7 +376,7 @@
                     radius : radius,
                     itemStyle : labelFromatter,
                     data : [
-                        {name:'Bounce', value:36, itemStyle : labelTop},
+                        {name:'临时离所', value:36, itemStyle : labelTop},
                         {name:'other', value:64, itemStyle : labelBottom}
                     ]
                 },{
@@ -401,8 +385,8 @@
                     radius : radius,
                     itemStyle : labelFromatter,
                     data : [
-                        {name:'Activation', value:45, itemStyle : labelTop},
-                        {name:'other', value:55, itemStyle : labelBottom}
+                        {name:'行政拘留', value:10, itemStyle : labelTop},
+                        {name:'other', value:90, itemStyle : labelBottom}
                     ]
                 },{
                     type : 'pie',
@@ -410,8 +394,8 @@
                     radius : radius,
                     itemStyle : labelFromatter,
                     data : [
-                        {name:'Retention', value:25, itemStyle : labelTop},
-                        {name:'other', value:75, itemStyle : labelBottom}
+                        {name:'强制戒毒', value:7.5, itemStyle : labelTop},
+                        {name:'other', value:92.5, itemStyle : labelBottom}
                     ]
                 },{
                     type : 'pie',
@@ -419,8 +403,8 @@
                     radius : radius,
                     itemStyle : labelFromatter,
                     data : [
-                        {name:'Referral', value:75, itemStyle : labelTop},
-                        {name:'other', value:25, itemStyle : labelBottom}
+                        {name:'行政拘留', value:15, itemStyle : labelTop},
+                        {name:'other', value:85, itemStyle : labelBottom}
                     ]
                 }
             ]

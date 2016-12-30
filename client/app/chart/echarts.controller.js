@@ -347,7 +347,7 @@
                 }
             },
             legend: {
-                data:['Direct','Email','Affiliate','Video Ads','Search','Baidu','Google','Bing','Others']
+                data:['临时离所','行政拘留','强制戒毒','刑事拘留']
             },
             calculable : true,
             xAxis : [
@@ -601,7 +601,7 @@
 
         $scope.pie1.options = {
             title : {
-                text: 'Traffic Source',
+                text: '离所人员统计',
                 x:'center'
             },
             tooltip : {
@@ -611,7 +611,7 @@
             legend: {
                 orient : 'vertical',
                 x : 'left',
-                data:['Direct','Email','Affiliate','Video Ads','Search']
+                data:['临时离所','行政拘留','强制戒毒','刑事拘留']
             },
             toolbox: {
                 show : true,
@@ -628,11 +628,10 @@
                     radius : '55%',
                     center: ['50%', '60%'],
                     data:[
-                        {value:335, name:'Direct'},
-                        {value:310, name:'Email'},
-                        {value:234, name:'Affiliate'},
-                        {value:135, name:'Video Ads'},
-                        {value:1548, name:'Search'}
+                        {value:500, name:'临时离所'},
+                        {value:310, name:'行政拘留'},
+                        {value:234, name:'强制戒毒'},
+                        {value:135, name:'刑事拘留'}
                     ]
                 }
             ]
