@@ -1,55 +1,55 @@
-<div class="page page-station-map" ng-class="{'container--overflow':isSpaceListOpen}" ng-controller="stationMapCtrl">
+<div class="page page-station-map" ng-class="{'containeroverflow':isSpaceListOpen}" ng-controller="stationMapCtrl">
     <div class="main">
-        <div class="mall" ng-class="{'mall--content-open':isOpenContentArea}">
-            <div class="surroundings" ng-class="{'surroundings--hidden':!showingSurroundings}">
-                <img class="surroundings__map" src="/images/maps/surroundings.svg" alt="Surroundings"/>
+        <div class="mall" ng-class="{'mall-content-open':isOpenContentArea}">
+            <div class="surroundings" ng-class="{'surroundings-hidden':!showingSurroundings}">
+                <img class="surroundings-map" src="/images/maps/surroundings.svg" alt="Surroundings"/>
             </div>
-            <div class="levels levels--selected-{{ selectedLevel }}" ng-class="{'levels--open':isExpanded}">
-                <div class="level level--{{ level.level }}" ng-repeat="level in levels" ng-class="{'level--current':selectedLevel == level.level || prevSelectedLevel == level.level, 'level--moveOutUp':movingOutDirection == 'Up' && prevSelectedLevel == level.level, 'level--moveOutDown':movingOutDirection == 'Down' && prevSelectedLevel == level.level}" ng-click="showLevel(level.level)" aria-label="{{ level.level }}层">
+            <div class="levels levels-selected-{{ selectedLevel }}" ng-class="{'levels-open':isExpanded}">
+                <div class="level level-{{ level.level }}" ng-repeat="level in levels" ng-class="{'level-current':selectedLevel == level.level || prevSelectedLevel == level.level, 'level-moveOutUp':movingOutDirection == 'Up' && prevSelectedLevel == level.level, 'level-moveOutDown':movingOutDirection == 'Down' && prevSelectedLevel == level.level}" ng-click="showLevel(level.level)" aria-label="{{ level.level }}层">
                     <span ng-include="'images/maps/level-' + level.level + '.svg'"></span>
-                    <div class="level__pins" ng-class="{'level__pins--active':selectedLevel == level.level && showingPins}">
-                        <a ng-repeat="target in targets" ng-if="target.level == level.level" class="pin pin--{{ level.level }}-{{ $index + 1 }}" ng-class="{'pin--active':showingSpace && spaceref == target.space}" data-category="{{ target.category }}" data-space="{{ target.space }}" aria-label="{{ target.name }}" ng-click="openContent(target.space)">
-                            <span class="pin__icon">
-                                <svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
-                                <span class="icon--label">{{ target.id }}</span>
+                    <div class="level-pins" ng-class="{'level-pins-active':selectedLevel == level.level && showingPins}">
+                        <a ng-repeat="target in targets" ng-if="target.level == level.level" class="pin pin-{{ level.level }}-{{ $index + 1 }}" ng-class="{'pin-active':showingSpace && spaceref == target.space}" data-category="{{ target.category }}" data-space="{{ target.space }}" aria-label="{{ target.name }}" ng-click="openContent(target.space)">
+                            <span class="pin-icon">
+                                <svg class="icon icon-pin"><use xlink:href="#icon-pin"></use></svg>
+                                <span class="icon-label">{{ target.id }}</span>
                             </span>
                         </a>
                     </div>
-                    <!-- /level__pins -->
+                    <!-- /level-pins -->
                 </div>
             </div>
             <!-- /levels -->
         </div>
         <!-- /mall -->
-        <button class="boxbutton boxbutton--dark open-search" aria-label="Show search"><svg class="icon icon--search" ng-click="openSearch()"><use xlink:href="#icon-search"></use></svg></button>
-        <nav class="mallnav" ng-class="{'mallnav--hidden':!showingMallNav}">
-            <button class="boxbutton mallnav__button--up" ng-class="{'boxbutton--disabled':selectedLevel == levels.length || isOpenContentArea}" aria-label="Go up" ng-click="navigate('Down')"><svg class="icon icon--angle-down"><use xlink:href="#icon-angle-up"></use></svg></button>
-            <button class="boxbutton boxbutton--dark mallnav__button--all-levels" aria-label="Back to all levels" ng-click="showAllLevels()"><svg class="icon icon--stack"><use xlink:href="#icon-stack"></use></svg></button>
-            <button class="boxbutton mallnav__button--down" ng-class="{'boxbutton--disabled':selectedLevel == 1 || isOpenContentArea}" aria-label="Go down" ng-click="navigate('Up')"><svg class="icon icon--angle-down"><use xlink:href="#icon-angle-down"></use></svg></button>
+        <button class="boxbutton boxbutton-dark open-search" aria-label="Show search"><svg class="icon icon-search" ng-click="openSearch()"><use xlink:href="#icon-search"></use></svg></button>
+        <nav class="mallnav" ng-class="{'mallnav-hidden':!showingMallNav}">
+            <button class="boxbutton mallnav-button-up" ng-class="{'boxbutton-disabled':selectedLevel == levels.length || isOpenContentArea}" aria-label="Go up" ng-click="navigate('Down')"><svg class="icon icon-angle-down"><use xlink:href="#icon-angle-up"></use></svg></button>
+            <button class="boxbutton boxbutton-dark mallnav-button-all-levels" aria-label="Back to all levels" ng-click="showAllLevels()"><svg class="icon icon-stack"><use xlink:href="#icon-stack"></use></svg></button>
+            <button class="boxbutton mallnav-button-down" ng-class="{'boxbutton-disabled':selectedLevel == 1 || isOpenContentArea}" aria-label="Go down" ng-click="navigate('Up')"><svg class="icon icon-angle-down"><use xlink:href="#icon-angle-down"></use></svg></button>
         </nav>
         <div class="content">
-            <div class="content__item" ng-class="{'content__item--current':showingSpace && spaceref == target.space,'content--open':slidingSpace}" ng-repeat="target in targets" data-space="{{ target.space }}" data-category="{{ target.category }}">
-                <h3 class="content__item-title">{{ target.name }}</h3>
-                <div class="content__item-details">
-                    <p class="content__meta">
-                        <span class="content__meta-item" ng-if="target.status"><strong>状态：</strong> {{ target.status }}</span> 
-                        <span class="content__meta-item"><strong>位置：</strong> {{ target.space }}</span>
+            <div class="content-item" ng-class="{'content-item-current':showingSpace && spaceref == target.space,'content-open':slidingSpace}" ng-repeat="target in targets" data-space="{{ target.space }}" data-category="{{ target.category }}">
+                <h3 class="content-item-title">{{ target.name }}</h3>
+                <div class="content-item-details">
+                    <p class="content-meta">
+                        <span class="content-meta-item" ng-if="target.status"><strong>状态：</strong> {{ target.status }}</span> 
+                        <span class="content-meta-item"><strong>位置：</strong> {{ target.space }}</span>
                     </p>
                 </div>
             </div>
-            <button class="boxbutton boxbutton--dark content__button" ng-class="{'content__button--hidden':!isOpenContentArea}" aria-label="Close details"><svg class="icon icon--cross" ng-click="closeContentArea()"><use xlink:href="#icon-cross"></use></svg></button>
+            <button class="boxbutton boxbutton-dark content-button" ng-class="{'content-button-hidden':!isOpenContentArea}" aria-label="Close details"><svg class="icon icon-cross" ng-click="closeContentArea()"><use xlink:href="#icon-cross"></use></svg></button>
         </div>
         <!-- content -->
     </div>
     <!-- /main -->
-    <aside class="spaces-list" ng-class="{'spaces-list--open':isSpaceListOpen}" id="spaces-list">
+    <aside class="spaces-list" ng-class="{'spaces-list-open':isSpaceListOpen}" id="spaces-list">
         <div class="search">
-            <input class="search__input" placeholder="搜索…" ng-model="targetNameSearch" />
-            <button class="boxbutton boxbutton--darker close-search" aria-label="Close details"><svg class="icon icon--cross" ng-click="closeSearch()"><use xlink:href="#icon-cross"></use></svg></button>
+            <input class="search-input" placeholder="搜索…" ng-model="targetNameSearch" />
+            <button class="boxbutton boxbutton-darker close-search" aria-label="Close details"><svg class="icon icon-cross" ng-click="closeSearch()"><use xlink:href="#icon-cross"></use></svg></button>
         </div>
         <ul class="list grouped-by-category">
-            <li class="list__item" ng-class="{'list__item--active':spaceref == target.space}" ng-repeat="target in targets | filter:targetNameSearch" data-level="{{ target.level }}" data-category="{{ target.category }}" data-space="{{ target.space }}">
-                <a href="" class="list__link" ng-click="closeSearch();showLevel(target.level);openContent(target.space)">{{ target.name }}</a>
+            <li class="list-item" ng-class="{'list-item-active':spaceref == target.space}" ng-repeat="target in targets | filter:targetNameSearch" data-level="{{ target.level }}" data-category="{{ target.category }}" data-space="{{ target.space }}">
+                <a href="" class="list-link" ng-click="closeSearch();showLevel(target.level);openContent(target.space)">{{ target.name }}</a>
             </li>
         </ul>
     </aside>
