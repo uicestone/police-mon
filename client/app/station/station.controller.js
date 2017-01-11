@@ -1,530 +1,219 @@
 (function () {
-	'use strict';
+    'use strict';
 
-	angular.module('app.station')
-	.controller('stationMapCtrl', ['$scope', '$timeout', stationMapCtrl]);
+    angular.module('app.station')
+    .controller('stationMapCtrl', ['$scope', '$timeout', stationMapCtrl]);
 
-	function stationMapCtrl($scope, $timeout) {
+    function stationMapCtrl($scope, $timeout) {
 
-		$scope.targets = [
-			{"level":"1", "category":"1", "space":"办公室", "name":"张三"},
-			{"level":"1", "category":"1", "space":"讯询问室（1）", "name":"李四"},
-			{"level":"1", "category":"1", "space":"讯询问室（1）", "name":"王五"},
-			{"level":"1", "category":"1", "space":"人身安全检查室", "name":"赵六"},
-			{"level":"1", "category":"1", "space":"等候室", "name":"钱七"},
-			{"level":"1", "category":"2", "status":"醒酒中", "space":"醒酒室", "name":"孙八"},
-			{"level":"1", "category":"2", "status":"讯询问中", "space":"讯询问室（1）", "name":"周九"},
-			{"level":"1", "category":"2", "status":"等候中", "space":"讯询问室（2）", "name":"吴十"},
-			{"level":"1", "category":"2", "status":"看管候问中", "space":"看管候问室", "name":"郑十一"}
-		];
+        $scope.targets = [
+            {"level":"1", "category":"1", "space":"办公室", "name":"张三"},
+            {"level":"1", "category":"1", "space":"讯询问室（1）", "name":"李四"},
+            {"level":"1", "category":"1", "space":"讯询问室（1）", "name":"王五"},
+            {"level":"1", "category":"1", "space":"人身安全检查室", "name":"赵六"},
+            {"level":"1", "category":"1", "space":"等候室", "name":"钱七"},
+            {"level":"1", "category":"2", "status":"醒酒中", "space":"醒酒室", "name":"孙八"},
+            {"level":"1", "category":"2", "status":"讯询问中", "space":"讯询问室（1）", "name":"周九"},
+            {"level":"1", "category":"2", "status":"等候中", "space":"讯询问室（2）", "name":"吴十"},
+            {"level":"1", "category":"2", "status":"看管候问中", "space":"看管候问室", "name":"郑十一"}
+        ];
 
-    	$timeout(map, 1000);
-    }
+        $scope.levels = 1;
 
-    function map() {
-    	// helper functions
-		// from https://davidwalsh.name/vendor-prefix
-		var prefix = (function () {
-			var styles = window.getComputedStyle(document.documentElement, ''),
-				pre = (Array.prototype.slice.call(styles).join('').match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o']))[1],
-				dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
-			
-			return {
-				dom: dom,
-				lowercase: pre,
-				css: '-' + pre + '-',
-				js: pre[0].toUpperCase() + pre.substr(1)
-			};
-		})();
-		
-		// vars & stuff
-		var support = {transitions : Modernizr.csstransitions},
-			transEndEventNames = {'WebkitTransition': 'webkitTransitionEnd', 'MozTransition': 'transitionend', 'OTransition': 'oTransitionEnd', 'msTransition': 'MSTransitionEnd', 'transition': 'transitionend'},
-			transEndEventName = transEndEventNames[Modernizr.prefixed('transition')],
-			onEndTransition = function(el, callback, propTest) {
-				var onEndCallbackFn = function( ev ) {
-					if( support.transitions ) {
-						if( ev.target != this || propTest && ev.propertyName !== propTest && ev.propertyName !== prefix.css + propTest ) return;
-						this.removeEventListener( transEndEventName, onEndCallbackFn );
-					}
-					if( callback && typeof callback === 'function' ) { callback.call(this); }
-				};
-				if( support.transitions ) {
-					el.addEventListener( transEndEventName, onEndCallbackFn );
-				}
-				else {
-					onEndCallbackFn();
-				}
-			},
-			// the mall element
-			mall = document.querySelector('.mall'),
-			// mall´s levels wrapper
-			mallLevelsEl = mall.querySelector('.levels'),
-			// mall´s levels
-			mallLevels = [].slice.call(mallLevelsEl.querySelectorAll('.level')),
-			// total levels
-			mallLevelsTotal = mallLevels.length,
-			// surroundings elems
-			mallSurroundings = [].slice.call(mall.querySelectorAll('.surroundings')),
-			// selected level position
-			selectedLevel,
-			// navigation element wrapper
-			mallNav = document.querySelector('.mallnav'),
-			// show all mall´s levels ctrl
-			allLevelsCtrl = mallNav.querySelector('.mallnav__button--all-levels'),
-			// levels navigation up/down ctrls
-			levelUpCtrl = mallNav.querySelector('.mallnav__button--up'),
-			levelDownCtrl = mallNav.querySelector('.mallnav__button--down'),
-			// pins
-			pins = [].slice.call(mallLevelsEl.querySelectorAll('.pin')),
-			// content element
-			contentEl = document.querySelector('.content'),
-			// content close ctrl
-			contentCloseCtrl = contentEl.querySelector('button.content__button'),
-			// check if a content item is opened
-			isOpenContentArea,
-			// check if currently animating/navigating
-			isNavigating,
-			// check if all levels are shown or if one level is shown (expanded)
-			isExpanded,
-			// spaces list element
-			spacesListEl = document.getElementById('spaces-list'),
-			// spaces list ul
-			spacesEl = spacesListEl.querySelector('ul.list'),
-			// all the spaces listed
-			spaces = [].slice.call(spacesEl.querySelectorAll('.list__item > a.list__link')),
-			// reference to the current shows space (name set in the data-name attr of both the listed spaces and the pins on the map)
-			spaceref,
-			// sort by ctrls
-			sortByNameCtrl = document.querySelector('#sort-by-name'),
-			// listjs initiliazation (all mall´s spaces)
-			// spacesList = new List('spaces-list', { valueNames: ['list__link', { data: ['level'] }, { data: ['category'] } ]} ),
-
-			// smaller screens:
-			// open search ctrl
-			openSearchCtrl = document.querySelector('button.open-search'),
-			// main container
-			containerEl = document.querySelector('.container'),
-			// close search ctrl
-			closeSearchCtrl = spacesListEl.querySelector('button.close-search');
-
-		init();
-
-		function init() {
-			// init/bind events
-			initEvents();
-			setTimeout(function() {
-				showLevel(1);
-			}, 3000);
-		}
+        $timeout(function() {
+        	$scope.showLevel(1);
+        }, 3000);
 
 		/**
-		 * Initialize/Bind events fn.
-		 */
-		function initEvents() {
-			// click on a Mall´s level
-			mallLevels.forEach(function(level, pos) {
-				level.addEventListener('click', function() {
-					// shows this level
-					showLevel(pos+1);
-				});
-			});
+         * Opens a level. The current level moves to the center while the other ones move away.
+         */
+        $scope.showLevel = function(level) {
+            if( $scope.isExpanded ) {
+                return false;
+            }
+            
+            $scope.selectedLevel = level;
 
-			// click on the show mall´s levels ctrl
-			allLevelsCtrl.addEventListener('click', function() {
-				// shows all levels
-				showAllLevels();
-			});
+            $scope.showPins();
+            $scope.isExpanded = true;
 
-			// navigating through the levels
-			levelUpCtrl.addEventListener('click', function() { navigate('Down'); });
-			levelDownCtrl.addEventListener('click', function() { navigate('Up'); });
+            $scope.hideSurroundings();
+            
+            // show mall nav ctrls
+            $scope.showMallNav();
 
-			// hovering a pin / clicking a pin
-			pins.forEach(function(pin) {
-				var contentItem = contentEl.querySelector('.content__item[data-space="' + pin.getAttribute('data-space') + '"]');
-				
-				if(!contentItem) {
-					console.error(pin.getAttribute('data-space'));
-				}
+            // filter the spaces for this level
+            $scope.showLevelSpaces();
+        }
 
-				pin.addEventListener('mouseenter', function() {
-					if( !isOpenContentArea ) {
-						classie.add(contentItem, 'content__item--hover');
-					}
-				});
-				pin.addEventListener('mouseleave', function() {
-					if( !isOpenContentArea ) {
-						classie.remove(contentItem, 'content__item--hover');
-					}
-				});
-				pin.addEventListener('click', function(ev) {
-					ev.preventDefault();
-					// open content for this pin
-					openContent(pin.getAttribute('data-space'));
-					// remove hover class (showing the title)
-					classie.remove(contentItem, 'content__item--hover');
-				});
-			});
+        /**
+         * Shows all Mall´s levels
+         */
+        $scope.showAllLevels = function() {
+            if( $scope.isNavigating || !$scope.isExpanded ) {
+                return false;
+            }
+            $scope.isExpanded = false;
 
-			// closing the content area
-			contentCloseCtrl.addEventListener('click', function() {
-				closeContentArea();
-			});
+            $scope.removePins();
 
-			// clicking on a listed space: open level - shows space
-			spaces.forEach(function(space) {
-				var spaceItem = space.parentNode,
-					level = spaceItem.getAttribute('data-level'),
-					spacerefval = spaceItem.getAttribute('data-space');
+            // shows surrounding element
+            $scope.eshowSurroundings();
+            
+            // hide mall nav ctrls
+            $scope.hideMallNav();
 
-				space.addEventListener('click', function(ev) {
-					ev.preventDefault();
-					// for smaller screens: close search bar
-					closeSearch();
-					// open level
-					showLevel(level);
-					// open content for this space
-					openContent(spacerefval);
-				});
-			});
+            // close content area if it is open
+            if( isOpenContentArea ) {
+                $scope.closeContentArea();
+            }
+        }
 
-			// smaller screens: open the search bar
-			openSearchCtrl.addEventListener('click', function() {
-				openSearch();
-			});
+        /**
+         * Shows all spaces for current level
+         */
+        $scope.showLevelSpaces = function() {
+            // spacesList.filter(function(item) { 
+            //     return item.values().level === selectedLevel.toString(); 
+            // });
+        }
 
-			// smaller screens: close the search bar
-			closeSearchCtrl.addEventListener('click', function() {
-				closeSearch();
-			});
-		}
+        /**
+         * Shows the level´s pins
+         */
+        $scope.showPins = function() {
+        	$scope.showingPins = true;
+        }
 
-		/**
-		 * Opens a level. The current level moves to the center while the other ones move away.
-		 */
-		function showLevel(level) {
-			if( isExpanded ) {
-				return false;
-			}
-			
-			// update selected level val
-			selectedLevel = level;
+        /**
+         * Removes the level´s pins
+         */
+        $scope.removePins = function() {
+        	$scope.showingPins = false;
+        }
 
-			// control navigation controls state
-			setNavigationState();
+        /**
+         * Show the navigation ctrls
+         */
+        $scope.showMallNav = function() {
+        	$scope.showingMallNav = true;
+        }
 
-			classie.add(mallLevelsEl, 'levels--selected-' + selectedLevel);
-			
-			// the level element
-			var levelEl = mallLevels[selectedLevel - 1];
-			classie.add(levelEl, 'level--current');
+        /**
+         * Hide the navigation ctrls
+         */
+        $scope.hideMallNav = function() {
+        	$scope.showingMallNav = false;
+        }
 
-			onEndTransition(levelEl, function() {
-				classie.add(mallLevelsEl, 'levels--open');
+        /**
+         * Show the surroundings level
+         */
+        $scope.showSurroundings = function() {
+        	$scope.showingSurroundings = true;
+        }
 
-				// show level pins
-				showPins();
+        /**
+         * Hide the surroundings level
+         */
+        $scope.hideSurroundings = function() {
+        	$scope.showingSurroundings = false;
+        }
 
-				isExpanded = true;
-			}, 'transform');
-			
-			// hide surroundings element
-			hideSurroundings();
-			
-			// show mall nav ctrls
-			showMallNav();
+        /**
+         * Navigate through the mall´s levels
+         */
+        $scope.navigate = function(direction) {
+            if( $scope.isNavigating || !$scope.isExpanded || $scope.isOpenContentArea ) {
+                return false;
+            }
+            $scope.isNavigating = true;
 
-			// filter the spaces for this level
-			showLevelSpaces();
-		}
+            $scope.prevSelectedLevel = $scope.selectedLevel;
 
-		/**
-		 * Shows all Mall´s levels
-		 */
-		function showAllLevels() {
-			if( isNavigating || !isExpanded ) {
-				return false;
-			}
-			isExpanded = false;
+            if( direction === 'Up' && $scope.prevSelectedLevel > 1 ) {
+                --$scope.selectedLevel;
+            }
+            else if( direction === 'Down' && $scope.prevSelectedLevel < mallLevelsTotal ) {
+                ++$scope.selectedLevel;
+            }
+            else {
+                $scope.isNavigating = false;    
+                return false;
+            }
 
-			classie.remove(mallLevels[selectedLevel - 1], 'level--current');
-			classie.remove(mallLevelsEl, 'levels--selected-' + selectedLevel);
-			classie.remove(mallLevelsEl, 'levels--open');
+            $scope.movingOutDirection = direction;
 
-			// hide level pins
-			removePins();
+            $scope.showLevelSpaces();
 
-			// shows surrounding element
-			showSurroundings();
-			
-			// hide mall nav ctrls
-			hideMallNav();
+            $scope.removePins();
+        }
 
-			// show back the complete list of spaces
-			// spacesList.filter();
+        /**
+         * Opens/Reveals a content item.
+         */
+        $scope.openContent = function(spacerefval) {
+            // if one already shown:
+            if( $scope.isOpenContentArea ) {
+                $scope.hideSpace();
+                $scope.spaceref = spacerefval;
+                $scope.showSpace();
+            }
+            else {
+                $scope.spaceref = $scope.spacerefval;
+                $scope.openContentArea();
+            }
+        }
 
-			// close content area if it is open
-			if( isOpenContentArea ) {
-				closeContentArea();
-			}
-		}
+        /**
+         * Opens the content area.
+         */
+        $scope.openContentArea = function() {
+            $scope.isOpenContentArea = true;
+            $scope.showSpace(true);
+        }
 
-		/**
-		 * Shows all spaces for current level
-		 */
-		function showLevelSpaces() {
-			// spacesList.filter(function(item) { 
-			// 	return item.values().level === selectedLevel.toString(); 
-			// });
-		}
+        /**
+         * Shows a space.
+         */
+        $scope.showSpace = function(sliding) {
+            $scope.showingSpace = true;
+        }
 
-		/**
-		 * Shows the level´s pins
-		 */
-		function showPins(levelEl) {
-			var levelEl = levelEl || mallLevels[selectedLevel - 1];
-			classie.add(levelEl.querySelector('.level__pins'), 'level__pins--active');
-		}
+        /**
+         * Closes the content area.
+         */
+        $scope.closeContentArea = function() {
+        	$scope.slidingSpace = false;
+        	$scope.isOpenContentArea = false;
+            $scope.hideSpace();
+        }
 
-		/**
-		 * Removes the level´s pins
-		 */
-		function removePins(levelEl) {
-			var levelEl = levelEl || mallLevels[selectedLevel - 1];
-			classie.remove(levelEl.querySelector('.level__pins'), 'level__pins--active');
-		}
+        /**
+         * Hides a space.
+         */
+        $scope.hideSpace = function(){
 
-		/**
-		 * Show the navigation ctrls
-		 */
-		function showMallNav() {
-			classie.remove(mallNav, 'mallnav--hidden');
-		}
+        	$scope.showingSpace = false;
+           
+        }
 
-		/**
-		 * Hide the navigation ctrls
-		 */
-		function hideMallNav() {
-			classie.add(mallNav, 'mallnav--hidden');
-		}
+        /**
+         * for smaller screens: open search bar
+         */
+        $scope.openSearch = function() {
 
-		/**
-		 * Show the surroundings level
-		 */
-		function showSurroundings() {
-			mallSurroundings.forEach(function(el) {
-				classie.remove(el, 'surroundings--hidden');
-			});
-		}
+            $scope.showAllLevels();
+            $scope.isSpaceListOpen = true;
+        }
 
-		/**
-		 * Hide the surroundings level
-		 */
-		function hideSurroundings() {
-			mallSurroundings.forEach(function(el) {
-				classie.add(el, 'surroundings--hidden');
-			});
-		}
+        /**
+         * for smaller screens: close search bar
+         */
+        $scope.closeSearch = function() {
+        	$scope.isSpaceListOpen = false;
+        }
 
-		/**
-		 * Navigate through the mall´s levels
-		 */
-		function navigate(direction) {
-			if( isNavigating || !isExpanded || isOpenContentArea ) {
-				return false;
-			}
-			isNavigating = true;
-
-			var prevSelectedLevel = selectedLevel;
-
-			// current level
-			var currentLevel = mallLevels[prevSelectedLevel-1];
-
-			if( direction === 'Up' && prevSelectedLevel > 1 ) {
-				--selectedLevel;
-			}
-			else if( direction === 'Down' && prevSelectedLevel < mallLevelsTotal ) {
-				++selectedLevel;
-			}
-			else {
-				isNavigating = false;	
-				return false;
-			}
-
-			// control navigation controls state (enabled/disabled)
-			setNavigationState();
-			// transition direction class
-			classie.add(currentLevel, 'level--moveOut' + direction);
-			// next level element
-			var nextLevel = mallLevels[selectedLevel-1]
-			// ..becomes the current one
-			classie.add(nextLevel, 'level--current');
-
-			// when the transition ends..
-			onEndTransition(currentLevel, function() {
-				classie.remove(currentLevel, 'level--moveOut' + direction);
-				// solves rendering bug for the SVG opacity-fill property
-				setTimeout(function() {classie.remove(currentLevel, 'level--current');}, 60);
-
-				classie.remove(mallLevelsEl, 'levels--selected-' + prevSelectedLevel);
-				classie.add(mallLevelsEl, 'levels--selected-' + selectedLevel);
-
-				// show the current level´s pins
-				showPins();
-
-				isNavigating = false;
-			});
-
-			// filter the spaces for this level
-			showLevelSpaces();
-
-			// hide the previous level´s pins
-			removePins(currentLevel);
-		}
-
-		/**
-		 * Control navigation ctrls state. Add disable class to the respective ctrl when the current level is either the first or the last.
-		 */
-		function setNavigationState() {
-			if( selectedLevel == 1 ) {
-				classie.add(levelDownCtrl, 'boxbutton--disabled');
-			}
-			else {
-				classie.remove(levelDownCtrl, 'boxbutton--disabled');
-			}
-
-			if( selectedLevel == mallLevelsTotal ) {
-				classie.add(levelUpCtrl, 'boxbutton--disabled');
-			}
-			else {
-				classie.remove(levelUpCtrl, 'boxbutton--disabled');
-			}
-		}
-
-		/**
-		 * Opens/Reveals a content item.
-		 */
-		function openContent(spacerefval) {
-			// if one already shown:
-			if( isOpenContentArea ) {
-				hideSpace();
-				spaceref = spacerefval;
-				showSpace();
-			}
-			else {
-				spaceref = spacerefval;
-				openContentArea();
-			}
-			
-			// remove class active (if any) from current list item
-			var activeItem = spacesEl.querySelector('li.list__item--active');
-			if( activeItem ) {
-				classie.remove(activeItem, 'list__item--active');
-			}
-			// list item gets class active
-			classie.add(spacesEl.querySelector('li[data-space="' + spacerefval + '"]'), 'list__item--active');
-
-			// remove class selected (if any) from current space
-			var activeSpaceArea = mallLevels[selectedLevel - 1].querySelector('svg > .map__space--selected');
-			if( activeSpaceArea ) {
-				classie.remove(activeSpaceArea, 'map__space--selected');
-			}
-			// svg area gets selected
-			classie.add(mallLevels[selectedLevel - 1].querySelector('svg > .map__space[data-space="' + spaceref + '"]'), 'map__space--selected');
-		}
-
-		/**
-		 * Opens the content area.
-		 */
-		function openContentArea() {
-			isOpenContentArea = true;
-			// shows space
-			showSpace(true);
-			// show close ctrl
-			classie.remove(contentCloseCtrl, 'content__button--hidden');
-			// resize mall area
-			classie.add(mall, 'mall--content-open');
-			// disable mall nav ctrls
-			classie.add(levelDownCtrl, 'boxbutton--disabled');
-			classie.add(levelUpCtrl, 'boxbutton--disabled');
-		}
-
-		/**
-		 * Shows a space.
-		 */
-		function showSpace(sliding) {
-			// the content item
-			var contentItem = contentEl.querySelector('.content__item[data-space="' + spaceref + '"]');
-			// show content
-			classie.add(contentItem, 'content__item--current');
-			if( sliding ) {
-				onEndTransition(contentItem, function() {
-					classie.add(contentEl, 'content--open');
-				});
-			}
-			// map pin gets selected
-			classie.add(mallLevelsEl.querySelector('.pin[data-space="' + spaceref + '"]'), 'pin--active');
-		}
-
-		/**
-		 * Closes the content area.
-		 */
-		function closeContentArea() {
-			classie.remove(contentEl, 'content--open');
-			// close current space
-			hideSpace();
-			// hide close ctrl
-			classie.add(contentCloseCtrl, 'content__button--hidden');
-			// resize mall area
-			classie.remove(mall, 'mall--content-open');
-			// enable mall nav ctrls
-			if( isExpanded ) {
-				setNavigationState();
-			}
-			isOpenContentArea = false;
-		}
-
-		/**
-		 * Hides a space.
-		 */
-		function hideSpace() {
-			// the content item
-			var contentItem = contentEl.querySelector('.content__item[data-space="' + spaceref + '"]');
-			// hide content
-			classie.remove(contentItem, 'content__item--current');
-			// map pin gets unselected
-			classie.remove(mallLevelsEl.querySelector('.pin[data-space="' + spaceref + '"]'), 'pin--active');
-			// remove class active (if any) from current list item
-			var activeItem = spacesEl.querySelector('li.list__item--active');
-			if( activeItem ) {
-				classie.remove(activeItem, 'list__item--active');
-			}
-			// remove class selected (if any) from current space
-			var activeSpaceArea = mallLevels[selectedLevel - 1].querySelector('svg > .map__space--selected');
-			if( activeSpaceArea ) {
-				classie.remove(activeSpaceArea, 'map__space--selected');
-			}
-		}
-
-		/**
-		 * for smaller screens: open search bar
-		 */
-		function openSearch() {
-			// shows all levels - we want to show all the spaces for smaller screens 
-			showAllLevels();
-
-			classie.add(spacesListEl, 'spaces-list--open');
-			classie.add(containerEl, 'container--overflow');
-		}
-
-		/**
-		 * for smaller screens: close search bar
-		 */
-		function closeSearch() {
-			classie.remove(spacesListEl, 'spaces-list--open');
-			classie.remove(containerEl, 'container--overflow');
-		}
     }
 
 })();
