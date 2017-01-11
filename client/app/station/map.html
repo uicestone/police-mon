@@ -1,18 +1,122 @@
-<div class="page">
-    <div class="row ui-section">
-        <div class="col-lg-8 clearfix">
-            <h2 class="section-header">1层</h2>
+<div class="page page-station-map" ng-controller="stationMapCtrl">
+    <div class="main">
+        <div class="mall">
+            <div class="surroundings">
+                <img class="surroundings__map" src="images/surroundings.svg" alt="Surroundings"/>
+            </div>
+            <div class="levels">
+                <div class="level level--1" aria-label="Level 1">
+                    <svg class="map map--1" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+                        <title>Map Level 1</title>
+                        <polygon points="1035.94 787.41 1035.94 423.16 855.37 423.16 855.37 350.52 1187.28 350.52 1187.28 12.59 548.09 12.59 548.09 68.87 437.36 68.87 437.36 12.59 49.37 12.59 49.37 366.5 12.72 366.5 12.72 787.41 356.2 787.41 414.93 584.41 554.4 584.41 627.81 787.41 1035.94 787.41" class="map__ground" />
+                        <path d="M1187.28,12.59V350.52H855.37v72.64h180.58V787.41H627.81l-73.41-203H414.93l-58.73,203H12.72V366.5H49.37V12.59h388V68.87H548.08V12.59h639.19M1200,0H535.36V56.28H450.09V0H36.65V353.91H0V800H365.8l2.64-9.13L424.52,597H545.44l70.39,194.65,3,8.35h429.82V410.57H868.09V363.11H1200V0h0Z" class="map__outline" />
+                        <path d="M425.68,198.63c-6.85-14.83-46.38-30.35-58-11.24-41.24,67.9-83.63,118.16-65.12,124.22,7.55,2.48,56.77.11,94.11-54.39,21.35-31.13,31.71-52.74,29-58.59h0Z" class="map__lake" />
+                        <ellipse cx="389.64" cy="214.94" rx="13.95" ry="13.8" class="map__tree" />
+                        <ellipse cx="369.54" cy="191.71" rx="13.95" ry="13.8" class="map__tree" />
+                        <ellipse cx="354.59" cy="220.27" rx="13.95" ry="13.8" class="map__tree" />
+                        <path d="M724.87,696.45c14.61,7.58,42.34-6.42,52.85-26.15,24.57-46.13-43.25-126.94-61.66-120.57-7.5,2.6-6.47,29.34-4.4,82.81C713.74,686.25,719.12,693.46,724.87,696.45Z" class="map__lake" />
+                        <ellipse cx="738.82" cy="595.48" rx="13.95" ry="13.8" class="map__tree" />
+                        <ellipse cx="768.46" cy="605.4" rx="13.95" ry="13.8" class="map__tree" />
+                        <ellipse cx="744.64" cy="624.92" rx="13.95" ry="13.8" class="map__tree" />
+                        <polygon data-space="醒酒室" points="874.9,554.3 874.9,422.9 1036.1,422.9 1036.1,576.6 965.2,576.6 965.2,555" class="map__space" />
+                        <rect x="854.08" y="639.79" width="88.09" height="147.62" class="map__space" />
+                        <rect x="947.85" y="639.79" width="88.09" height="147.62" class="map__space" />
+                        <polygon points="768.46 722.99 789.65 735.1 789.65 759.31 768.46 771.42 747.27 759.31 747.27 735.1 768.46 722.99" class="map__space" />
+                        <rect x="666.88" y="565.62" width="26.26" height="25.99" class="map__space" />
+                        <rect data-space="1.07" x="716.66" y="354.39" width="110.72" height="136.73" class="map__space" />
+                        <rect x="602.1" y="354.39" width="110.72" height="136.73" class="map__space" />
+                        <path data-space="讯询问室（1）" d="M454.76,266.19h63a24.34,24.34,0,0,1,24.47,24.21h0V489.82A24.34,24.34,0,0,1,517.74,514h-63a24.34,24.34,0,0,1-24.47-24.21h0V290.4a24.34,24.34,0,0,1,24.47-24.21h0Z" class="map__space" />
+                        <path d="M492.72,123.19c30.57,0,55.36-24.53,55.36-54.78H437.36C437.36,98.67,462.15,123.19,492.72,123.19Z" class="map__space" />
+                        <rect data-space="讯询问室（2）" x="600" y="12.59" width="93.14" height="168.14" class="map__space" />
+                        <rect data-space="看管候问室" x="698.07" y="12" width="93.14" height="168.14" class="map__space" />
+                        <rect x="796.13" y="12" width="93.14" height="107.12" class="map__space" />
+                        <rect x="894.18" y="12" width="93.14" height="107.12" class="map__space" />
+                        <rect data-space="等候室" x="991.9" y="12" width="195.4" height="339.1" class="map__space" />
+                        <rect x="602" y="278.06" width="385.71" height="72.46" class="map__space" />
+                        <rect x="48.89" y="209.37" width="169.92" height="94.85" class="map__space" />
+                        <rect data-space="讯询问室（1）" x="49.12" y="110.57" width="254.49" height="94.85" class="map__space" />
+                        <rect data-space="人身安全检查室" x="49.09" y="12.16" width="334.73" height="94.85" class="map__space" />
+                        <polygon points="898.12 182.42 919.31 194.53 919.31 218.74 898.12 230.85 876.93 218.74 876.93 194.53 898.12 182.42" class="map__space" />
+                        <polygon points="49.18 309.14 218.94 309.14 218.94 358.1 277.46 358.1 277.46 474.63 11.72 474.63 11.72 365.63 49.18 365.63 49.18 309.14" class="map__space" />
+                        <polygon data-space="办公室" points="12.72 685.56 153.78 685.56 153.78 747.64 215.44 747.64 215.44 712.85 263.89 712.85 263.89 787.41 12.72 787.41 12.72 685.56" class="map__space" />
+                        <rect x="48.08" y="501.73" width="35.61" height="35.23" class="map__space" />
+                        <rect x="94.01" y="501.73" width="35.61" height="35.23" class="map__space" />
+                        <rect x="139.5" y="501.73" width="35.61" height="35.23" class="map__space" />
+                        <rect x="48.3" y="547.25" width="35.61" height="35.23" class="map__space" />
+                        <rect x="94.24" y="547.25" width="35.61" height="35.23" class="map__space" />
+                        <rect x="139.72" y="547.25" width="35.61" height="35.23" class="map__space" />
+                        <rect x="282.3" y="478.13" width="26.26" height="25.99" class="map__space" />
+                        <polygon points="218.01 585.07 239.2 597.17 239.2 621.38 218.01 633.49 196.82 621.38 196.82 597.17 218.01 585.07" class="map__space" />
+                        <polygon points="410.01 601.42 358.8 778.44 320.06 767.07 372.92 591.6 410.01 601.42" class="map__space" />
+                        <polygon points="561.3,603.9 624,777 661.9,763.2 597.7,591.5" class="map__space" />
+                    </svg>
+                    <div class="level__pins">
+                        <a ng-repeat="target in targets" class="pin pin--1-{{ $index }}" data-category="{{ target.category }}" data-space="{{ target.space }}" href="" aria-label="{{ target.name }}">
+                            <span class="pin__icon">
+                                <svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- /level__pins -->
+                </div>
+            </div>
+            <!-- /levels -->
         </div>
-        <div class="col-md-12">
-            <img src="images/1F.jpg" style="width:100%">
+        <!-- /mall -->
+        <button class="boxbutton boxbutton--dark open-search" aria-label="Show search"><svg class="icon icon--search"><use xlink:href="#icon-search"></use></svg></button>
+        <nav class="mallnav mallnav--hidden">
+            <button class="boxbutton mallnav__button--up" aria-label="Go up"><svg class="icon icon--angle-down"><use xlink:href="#icon-angle-up"></use></svg></button>
+            <button class="boxbutton boxbutton--dark mallnav__button--all-levels" aria-label="Back to all levels"><svg class="icon icon--stack"><use xlink:href="#icon-stack"></use></svg></button>
+            <button class="boxbutton mallnav__button--down" aria-label="Go down"><svg class="icon icon--angle-down"><use xlink:href="#icon-angle-down"></use></svg></button>
+        </nav>
+        <div class="content">
+            <div class="content__item" ng-repeat="target in targets" data-space="{{ target.space }}" data-category="{{ target.category }}">
+                <h3 class="content__item-title">{{ target.name }}</h3>
+                <div class="content__item-details">
+                    <p class="content__meta">
+                        <span class="content__meta-item" ng-if="target.status"><strong>状态：</strong> {{ target.status }}</span> 
+                        <span class="content__meta-item"><strong>位置：</strong> {{ target.space }}</span>
+                    </p>
+                </div>
+            </div>
+            <button class="boxbutton boxbutton--dark content__button content__button--hidden" aria-label="Close details"><svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg></button>
         </div>
+        <!-- content -->
     </div>
-    <div class="row ui-section">
-        <div class="col-lg-8 clearfix">
-            <h2 class="section-header">2层</h2>
+    <!-- /main -->
+    <aside class="spaces-list" id="spaces-list">
+        <div class="search">
+            <input class="search__input" placeholder="搜索…" ng-model="targetNameSearch" />
+            <button class="boxbutton boxbutton--darker close-search" aria-label="Close details"><svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg></button>
         </div>
-        <div class="col-md-12">
-            <img src="images/1F.jpg" style="width:100%">
-        </div>
-    </div>
+        <ul class="list grouped-by-category">
+            <li class="list__item" ng-repeat="target in targets | filter:targetNameSearch" data-level="{{ target.level }}" data-category="{{ target.category }}" data-space="{{ target.space }}"><a href="" class="list__link">{{ target.name }}</a></li>
+        </ul>
+    </aside>
+    <!-- /spaces-list -->
 </div>
+<!-- /container -->
+<svg class="hidden">
+    <defs>
+        <symbol id="icon-pin" viewBox="0 0 200 300">
+            <title>pin</title>
+            <path d="M100,21.78A85,85,0,0,0,15.18,106.6c0,18.85,12.08,49.52,36.76,93.9,17.48,31.36,34.7,57.49,35.47,58.6L100,278.22l12.59-19.11c0.69-1.11,18-27.25,35.47-58.6,24.76-44.38,36.76-75.06,36.76-93.9A85,85,0,0,0,100,21.78Z" />
+        </symbol>
+        <symbol id="icon-search" viewBox="0 0 32 32">
+            <title>search</title>
+            <path class="path1" d="M26.819 24.917c0.262 0.262 0.262 0.688 0 0.951l-0.951 0.951c-0.263 0.262-0.688 0.262-0.951 0l-6.656-6.656c-0.072-0.072-0.12-0.158-0.153-0.248-1.365 0.998-3.041 1.593-4.862 1.593-4.562 0-8.261-3.699-8.261-8.261s3.699-8.261 8.261-8.261c4.562 0 8.261 3.699 8.261 8.261 0 1.821-0.595 3.497-1.593 4.862 0.091 0.032 0.176 0.080 0.248 0.153l6.656 6.656zM13.246 7.739c-3.041 0-5.508 2.466-5.508 5.508s2.466 5.508 5.508 5.508 5.508-2.466 5.508-5.508c0-3.041-2.466-5.508-5.508-5.508z"></path>
+        </symbol>
+        <symbol id="icon-stack" viewBox="0 0 32 32">
+            <title>stack</title>
+            <path class="path1" d="M29.143 11.071l-13.143-6.571-13.143 6.571 13.143 6.571 13.143-6.571zM16 6.681l8.781 4.39-8.781 4.39-8.781-4.39 8.781-4.39zM26.51 14.684l2.633 1.316-13.143 6.571-13.143-6.571 2.633-1.316 10.51 5.255zM26.51 19.612l2.633 1.316-13.143 6.571-13.143-6.571 2.633-1.316 10.51 5.255z"></path>
+        </symbol>
+        <symbol id="icon-cross" viewBox="0 0 24 24">
+            <title>cross</title>
+            <path class="path1" d="M18.016 5.125q0.369 0 0.614 0.245t0.245 0.614q0 0.363-0.248 0.611l-5.411 5.405 5.411 5.405q0.248 0.248 0.248 0.611 0 0.369-0.245 0.614t-0.614 0.245q-0.363 0-0.611-0.248l-5.405-5.411-5.405 5.411q-0.248 0.248-0.611 0.248-0.369 0-0.614-0.245t-0.245-0.614q0-0.363 0.248-0.611l5.411-5.405-5.411-5.405q-0.248-0.248-0.248-0.611 0-0.369 0.245-0.614t0.614-0.245q0.363 0 0.611 0.248l5.405 5.411 5.405-5.411q0.248-0.248 0.611-0.248z"></path>
+        </symbol>
+        <symbol id="icon-droplet" viewBox="0 0 32 32">
+            <title>droplet</title>
+            <path class="path1" d="M27.020 14.786c-2.055-5.732-6.41-10.88-11.020-14.786-4.61 3.907-8.965 9.054-11.020 14.786-1.271 3.545-1.396 7.393 0.393 10.794 2.058 3.911 6.207 6.42 10.626 6.42s8.569-2.509 10.626-6.42c1.79-3.401 1.664-7.249 0.393-10.794zM23.086 23.717c-1.369 2.602-4.15 4.283-7.086 4.283-1.723 0-3.391-0.579-4.753-1.583 0.414 0.054 0.832 0.083 1.254 0.083 3.67 0 7.146-2.1 8.856-5.351 1.402-2.665 1.281-5.433 0.746-7.636 0.455 0.88 0.841 1.756 1.151 2.623 0.706 1.971 1.251 4.886-0.168 7.581z"></path>
+        </symbol>
+    </defs>
+</svg>
