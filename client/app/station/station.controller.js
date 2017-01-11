@@ -35,13 +35,14 @@
             
             $scope.selectedLevel = level;
 
-            // $scope.showPins();
             $scope.isExpanded = true;
 
             $scope.hideSurroundings();
             
             // show mall nav ctrls
             $scope.showMallNav();
+
+            $scope.showPins();
         }
 
         /**
@@ -97,33 +98,45 @@
             $scope.showingSurroundings = false;
         }
 
+        $scope.showPins = function() {
+            $scope.showingPins = true;
+        }
+
+        $scope.hidePins = function() {
+            $scope.showingPins = false;
+        }
+
         /**
          * Navigate through the mall´s levels
          */
         $scope.navigate = function(direction) {
-            console.log($scope.isNavigating, $scope.isExpanded, $scope.isOpenContentArea)
+            
             if( $scope.isNavigating || !$scope.isExpanded || $scope.isOpenContentArea ) {
                 return false;
             }
 
-            $scope.isNavigating = true;
+            $scope.movingOutDirection = direction;
+            $scope.hidePins();
+
+            $timeout(function() {
+                // $scope.movingOutDirection = null;
+                $scope.prevSelectedLevel = null;
+                $scope.showPins();
+            }, 1000);
 
             $scope.prevSelectedLevel = $scope.selectedLevel;
 
-            if( direction === 'Up' && $scope.prevSelectedLevel < $scope.levels.length ) {
-                ++$scope.selectedLevel;
-            }
-            else if( direction === 'Down' && $scope.prevSelectedLevel > 1 ) {
+            if( direction === 'Up' &&  $scope.prevSelectedLevel > 1 ) {
                 --$scope.selectedLevel;
             }
+            else if( direction === 'Down' && $scope.prevSelectedLevel < $scope.levels.length ) {
+                ++$scope.selectedLevel;
+            }
             else {
-                $scope.isNavigating = false;    
+                // $scope.isNavigating = false;    
                 return false;
             }
 
-            $scope.movingOutDirection = direction;
-
-            // $scope.removePins();
         }
 
         /**
