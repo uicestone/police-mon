@@ -18,13 +18,14 @@
             {"level":"1", "category":"2", "status":"看管候问中", "space":"看管候问室", "name":"郑十一"}
         ];
 
-        $scope.levels = 1;
+        $scope.levels = [{}, {}, {}, {}];
+        $scope.showingSurroundings = true;
 
-        $timeout(function() {
-        	$scope.showLevel(1);
-        }, 3000);
+        // $timeout(function() {
+        //     $scope.showLevel(1);
+        // }, 3000);
 
-		/**
+        /**
          * Opens a level. The current level moves to the center while the other ones move away.
          */
         $scope.showLevel = function(level) {
@@ -34,108 +35,86 @@
             
             $scope.selectedLevel = level;
 
-            $scope.showPins();
+            // $scope.showPins();
             $scope.isExpanded = true;
 
             $scope.hideSurroundings();
             
             // show mall nav ctrls
             $scope.showMallNav();
-
-            // filter the spaces for this level
-            $scope.showLevelSpaces();
         }
 
         /**
          * Shows all Mall´s levels
          */
         $scope.showAllLevels = function() {
+
             if( $scope.isNavigating || !$scope.isExpanded ) {
                 return false;
             }
+
+            $scope.selectedLevel = null;
+
             $scope.isExpanded = false;
 
-            $scope.removePins();
-
             // shows surrounding element
-            $scope.eshowSurroundings();
+            $scope.showSurroundings();
             
             // hide mall nav ctrls
             $scope.hideMallNav();
 
             // close content area if it is open
-            if( isOpenContentArea ) {
+            if( $scope.isOpenContentArea ) {
                 $scope.closeContentArea();
             }
-        }
-
-        /**
-         * Shows all spaces for current level
-         */
-        $scope.showLevelSpaces = function() {
-            // spacesList.filter(function(item) { 
-            //     return item.values().level === selectedLevel.toString(); 
-            // });
-        }
-
-        /**
-         * Shows the level´s pins
-         */
-        $scope.showPins = function() {
-        	$scope.showingPins = true;
-        }
-
-        /**
-         * Removes the level´s pins
-         */
-        $scope.removePins = function() {
-        	$scope.showingPins = false;
         }
 
         /**
          * Show the navigation ctrls
          */
         $scope.showMallNav = function() {
-        	$scope.showingMallNav = true;
+            $scope.showingMallNav = true;
         }
 
         /**
          * Hide the navigation ctrls
          */
         $scope.hideMallNav = function() {
-        	$scope.showingMallNav = false;
+            $scope.showingMallNav = false;
         }
 
         /**
          * Show the surroundings level
          */
         $scope.showSurroundings = function() {
-        	$scope.showingSurroundings = true;
+            $scope.showingSurroundings = true;
         }
 
         /**
          * Hide the surroundings level
          */
         $scope.hideSurroundings = function() {
-        	$scope.showingSurroundings = false;
+            $scope.showingSurroundings = false;
         }
 
         /**
          * Navigate through the mall´s levels
          */
         $scope.navigate = function(direction) {
+            console.log($scope.isNavigating, $scope.isExpanded, $scope.isOpenContentArea)
             if( $scope.isNavigating || !$scope.isExpanded || $scope.isOpenContentArea ) {
                 return false;
             }
+
             $scope.isNavigating = true;
 
             $scope.prevSelectedLevel = $scope.selectedLevel;
 
-            if( direction === 'Up' && $scope.prevSelectedLevel > 1 ) {
-                --$scope.selectedLevel;
-            }
-            else if( direction === 'Down' && $scope.prevSelectedLevel < mallLevelsTotal ) {
+            if( direction === 'Up' && $scope.prevSelectedLevel < $scope.levels.length ) {
                 ++$scope.selectedLevel;
+            }
+            else if( direction === 'Down' && $scope.prevSelectedLevel > 1 ) {
+                --$scope.selectedLevel;
             }
             else {
                 $scope.isNavigating = false;    
@@ -144,9 +123,7 @@
 
             $scope.movingOutDirection = direction;
 
-            $scope.showLevelSpaces();
-
-            $scope.removePins();
+            // $scope.removePins();
         }
 
         /**
@@ -184,8 +161,8 @@
          * Closes the content area.
          */
         $scope.closeContentArea = function() {
-        	$scope.slidingSpace = false;
-        	$scope.isOpenContentArea = false;
+            $scope.slidingSpace = false;
+            $scope.isOpenContentArea = false;
             $scope.hideSpace();
         }
 
@@ -193,16 +170,13 @@
          * Hides a space.
          */
         $scope.hideSpace = function(){
-
-        	$scope.showingSpace = false;
-           
+            $scope.showingSpace = false;
         }
 
         /**
          * for smaller screens: open search bar
          */
         $scope.openSearch = function() {
-
             $scope.showAllLevels();
             $scope.isSpaceListOpen = true;
         }
@@ -211,7 +185,7 @@
          * for smaller screens: close search bar
          */
         $scope.closeSearch = function() {
-        	$scope.isSpaceListOpen = false;
+            $scope.isSpaceListOpen = false;
         }
 
     }
