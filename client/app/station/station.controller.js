@@ -7,18 +7,18 @@
     function stationMapCtrl($scope, $timeout) {
 
         $scope.targets = [
-            {"level":"1", "category":"1", "space":"办公室", "name":"张三"},
-            {"level":"1", "category":"1", "space":"讯询问室（1）", "name":"李四"},
-            {"level":"1", "category":"1", "space":"讯询问室（1）", "name":"王五"},
-            {"level":"1", "category":"1", "space":"人身安全检查室", "name":"赵六"},
-            {"level":"1", "category":"1", "space":"等候室", "name":"钱七"},
-            {"level":"1", "category":"2", "status":"醒酒中", "space":"醒酒室", "name":"孙八"},
-            {"level":"1", "category":"2", "status":"讯询问中", "space":"讯询问室（1）", "name":"周九"},
-            {"level":"1", "category":"2", "status":"等候中", "space":"讯询问室（2）", "name":"吴十"},
-            {"level":"1", "category":"2", "status":"看管候问中", "space":"看管候问室", "name":"郑十一"}
+            {"id":1, "level":"2", "category":"1", "space":"办公室", "name":"张三"},
+            {"id":2, "level":"1", "category":"1", "space":"讯询问室（1）", "name":"李四"},
+            {"id":3, "level":"1", "category":"1", "space":"讯询问室（1）", "name":"王五"},
+            {"id":4, "level":"1", "category":"1", "space":"人身安全检查室", "name":"赵六"},
+            {"id":5, "level":"2", "category":"1", "space":"办公室", "name":"钱七"},
+            {"id":6, "level":"1", "category":"2", "status":"醒酒中", "space":"醒酒室", "name":"孙八"},
+            {"id":7, "level":"1", "category":"2", "status":"讯询问中", "space":"讯询问室（1）", "name":"周九"},
+            {"id":8, "level":"1", "category":"2", "status":"等候中", "space":"讯询问室（2）", "name":"吴十"},
+            {"id":9, "level":"1", "category":"2", "status":"看管候问中", "space":"看管候问室", "name":"郑十一"}
         ];
 
-        $scope.levels = [{}, {}, {}, {}];
+        $scope.levels = [{level: 1}, {level: 2}, {level: 3}, {level: 4}];
         $scope.showingSurroundings = true;
 
         // $timeout(function() {

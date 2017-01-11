@@ -5,12 +5,13 @@
                 <img class="surroundings__map" src="/images/maps/surroundings.svg" alt="Surroundings"/>
             </div>
             <div class="levels levels--selected-{{ selectedLevel }} level--moveOut{{ movingOutDirection }}" ng-repeat="level in levels" ng-class="{'levels--open':isExpanded}">
-                <div class="level level--{{ $index + 1 }}" aria-label="1层" ng-class="{'level--current':selectedLevel == $index + 1}" ng-click="showLevel($index + 1)">
-                    <span ng-include="'images/maps/level-' + ($index + 1) + '.svg'"></span>
-                    <div class="level__pins" ng-class="{'level__pins--active':selectedLevel == $index + 1}">
-                        <a ng-repeat="target in targets" class="pin pin--1-{{ $index }}" ng-class="{'pin--active':showingSpace && spaceref == target.space}" data-category="{{ target.category }}" data-space="{{ target.space }}" aria-label="{{ target.name }}" ng-click="openContent(target.space)">
+                <div class="level level--{{ level.level }}" aria-label="1层" ng-class="{'level--current':selectedLevel == level.level}" ng-click="showLevel(level.level)">
+                    <span ng-include="'images/maps/level-' + level.level + '.svg'"></span>
+                    <div class="level__pins" ng-class="{'level__pins--active':selectedLevel == level.level}">
+                        <a ng-repeat="target in targets" class="pin pin--{{ level.level }}-{{ $index + 1 }}" ng-class="{'pin--active':showingSpace && spaceref == target.space}" data-category="{{ target.category }}" data-space="{{ target.space }}" aria-label="{{ target.name }}" ng-click="openContent(target.space)">
                             <span class="pin__icon">
                                 <svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+                                <span class="icon--label">{{ target.id }}</span>
                             </span>
                         </a>
                     </div>
