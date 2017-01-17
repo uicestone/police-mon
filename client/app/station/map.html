@@ -8,7 +8,7 @@
                 <div class="level level-{{ level.level }}" ng-repeat="level in levels" ng-class="{'level-current':selectedLevel == level.level || prevSelectedLevel == level.level, 'level-moveOutUp':movingOutDirection == 'Up' && prevSelectedLevel == level.level, 'level-moveOutDown':movingOutDirection == 'Down' && prevSelectedLevel == level.level}" ng-click="showLevel(level.level)" aria-label="{{ level.level }}层">
                     <span ng-include="'images/maps/level-' + level.level + '.svg'"></span>
                     <div class="level-pins" ng-class="{'level-pins-active':selectedLevel == level.level && showingPins}">
-                        <a ng-repeat="target in targets" ng-if="target.level == level.level" class="pin pin-{{ level.level }}-{{ $index + 1 }}" ng-class="{'pin-active':showingSpace && spaceref == target.space}" data-category="{{ target.category }}" data-space="{{ target.space }}" aria-label="{{ target.name }}" ng-click="openContent(target.space)">
+                        <a ng-repeat="target in targets" ng-if="target.level == level.level" class="pin pin-{{ level.level }}-{{ target.id }}" ng-class="{'pin-active':selectedTarget.id == target.id}" data-category="{{ target.category }}" data-space="{{ target.space }}" aria-label="{{ target.name }}" ng-click="openContent(target)">
                             <span class="pin-icon">
                                 <svg class="icon icon-pin"><use xlink:href="#icon-pin"></use></svg>
                                 <span class="icon-label">{{ target.id }}</span>
@@ -28,7 +28,7 @@
             <button class="boxbutton mallnav-button-down" ng-class="{'boxbutton-disabled':selectedLevel == 1 || isOpenContentArea}" aria-label="Go down" ng-click="navigate('Up')"><svg class="icon icon-angle-down"><use xlink:href="#icon-angle-down"></use></svg></button>
         </nav>
         <div class="content">
-            <div class="content-item" ng-class="{'content-item-current':showingSpace && spaceref == target.space,'content-open':slidingSpace}" ng-repeat="target in targets" data-space="{{ target.space }}" data-category="{{ target.category }}">
+            <div class="content-item" ng-class="{'content-item-current':selectedTarget.id == target.id,'content-open':slidingSpace}" ng-repeat="target in targets" data-space="{{ target.space }}" data-category="{{ target.category }}">
                 <h3 class="content-item-title">{{ target.name }}</h3>
                 <div class="content-item-details">
                     <p class="content-meta">
@@ -37,6 +37,7 @@
                     </p>
                 </div>
             </div>
+            <!-- <video src="https://o5qb3884t.qnssl.com/%E5%BC%80%E5%9C%BA%E8%A7%86%E9%A2%91.mp4"  preload="none" class="content-item" ng-class="{'content-item-current':true}"></video> -->
             <button class="boxbutton boxbutton-dark content-button" ng-class="{'content-button-hidden':!isOpenContentArea}" aria-label="Close details"><svg class="icon icon-cross" ng-click="closeContentArea()"><use xlink:href="#icon-cross"></use></svg></button>
         </div>
         <!-- content -->
@@ -48,8 +49,8 @@
             <button class="boxbutton boxbutton-darker close-search" aria-label="Close details"><svg class="icon icon-cross" ng-click="closeSearch()"><use xlink:href="#icon-cross"></use></svg></button>
         </div>
         <ul class="list grouped-by-category">
-            <li class="list-item" ng-class="{'list-item-active':spaceref == target.space}" ng-repeat="target in targets | filter:targetNameSearch" data-level="{{ target.level }}" data-category="{{ target.category }}" data-space="{{ target.space }}">
-                <a href="" class="list-link" ng-click="closeSearch();showLevel(target.level);openContent(target.space)">{{ target.name }}</a>
+            <li class="list-item" ng-class="{'list-item-active':selectedTarget.id == target.id}" ng-repeat="target in targets | filter:targetNameSearch" data-level="{{ target.level }}" data-category="{{ target.category }}" data-space="{{ target.space }}">
+                <a href="" class="list-link" ng-click="closeSearch();showLevel(target.level);openContent(target)">{{ target.name }}</a>
             </li>
         </ul>
     </aside>

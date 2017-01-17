@@ -7,15 +7,15 @@
     function stationMapCtrl($scope, $timeout) {
 
         $scope.targets = [
-            {"id":1, "level":"2", "category":"1", "space":"办公室", "name":"张三"},
-            {"id":2, "level":"1", "category":"1", "space":"讯询问室（1）", "name":"李四"},
+            {"id":1, "level":"2", "category":"1", "space":"办公室（1）", "name":"张三"},
+            {"id":2, "level":"1", "category":"1", "space":"人身安全检查室", "name":"李四"},
             {"id":3, "level":"1", "category":"1", "space":"讯询问室（1）", "name":"王五"},
-            {"id":4, "level":"1", "category":"1", "space":"人身安全检查室", "name":"赵六"},
-            {"id":5, "level":"2", "category":"1", "space":"办公室", "name":"钱七"},
-            {"id":6, "level":"1", "category":"2", "status":"醒酒中", "space":"醒酒室", "name":"孙八"},
+            {"id":4, "level":"1", "category":"1", "space":"讯询问室（1）", "name":"赵六"},
+            {"id":5, "level":"2", "category":"1", "space":"办公室（2）", "name":"钱七"},
+            {"id":6, "level":"1", "category":"2", "status":"人身安全检查中", "space":"人身安全检查室", "name":"孙八"},
             {"id":7, "level":"1", "category":"2", "status":"讯询问中", "space":"讯询问室（1）", "name":"周九"},
-            {"id":8, "level":"1", "category":"2", "status":"等候中", "space":"讯询问室（2）", "name":"吴十"},
-            {"id":9, "level":"1", "category":"2", "status":"看管候问中", "space":"看管候问室", "name":"郑十一"}
+            {"id":8, "level":"1", "category":"2", "status":"看管候问中", "space":"看管候问室", "name":"吴十"},
+            {"id":9, "level":"1", "category":"2", "status":"醒酒中", "space":"醒酒室", "name":"郑十一"}
         ];
 
         $scope.levels = [{level: 1}, {level: 2}, {level: 3}, {level: 4}];
@@ -142,15 +142,11 @@
         /**
          * Opens/Reveals a content item.
          */
-        $scope.openContent = function(spacerefval) {
-            // if one already shown:
-            if( $scope.isOpenContentArea ) {
-                $scope.hideSpace();
-                $scope.spaceref = spacerefval;
-                $scope.showSpace();
-            }
-            else {
-                $scope.spaceref = $scope.spacerefval;
+        $scope.openContent = function(target) {
+
+            $scope.selectedTarget = target;
+            
+            if( !$scope.isOpenContentArea ) {
                 $scope.openContentArea();
             }
         }
@@ -160,14 +156,6 @@
          */
         $scope.openContentArea = function() {
             $scope.isOpenContentArea = true;
-            $scope.showSpace(true);
-        }
-
-        /**
-         * Shows a space.
-         */
-        $scope.showSpace = function(sliding) {
-            $scope.showingSpace = true;
         }
 
         /**
@@ -176,14 +164,7 @@
         $scope.closeContentArea = function() {
             $scope.slidingSpace = false;
             $scope.isOpenContentArea = false;
-            $scope.hideSpace();
-        }
-
-        /**
-         * Hides a space.
-         */
-        $scope.hideSpace = function(){
-            $scope.showingSpace = false;
+            $scope.selectedTarget = null;
         }
 
         /**
