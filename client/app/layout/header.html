@@ -89,7 +89,11 @@
         </ul> 
 
         <ul class="nav-right pull-right list-unstyled">
-
+            <li>
+                <md-switch aria-label="Bluetooth" ng-model="$parent.bluetoothEnabled" ng-click="enableBluetooth()">
+                    <i class="zmdi zmdi-bluetooth"></i>
+                </md-switch>
+            </li>
             <li class="dropdown text-normal nav-profile" uib-dropdown is-open="status.isopenProfile">
                 <a href="javascript:;" class="dropdown-toggle" uib-dropdown-toggle ng-disabled="disabled" md-button aria-label="profile">
                     <img src="images/g1.jpg" alt="" class="img-circle img30_30">

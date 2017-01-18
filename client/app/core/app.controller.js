@@ -36,6 +36,24 @@
             }
         }, true);
 
+        $scope.enableBluetooth = function() {
+            
+            if($scope.bluetoothEnabled) {
+                return;
+            }
+
+            navigator.bluetooth.requestDevice({
+                filters: [{
+                    services: ['battery_service']
+                }]
+            })
+            .then(function(device) {
+                console.log(device);
+            }, function(err) {
+                $scope.bluetoothEnabled = false;
+                $scope.$apply();
+            });
+        };
 
         $rootScope.$on("$stateChangeSuccess", function (event, currentRoute, previousRoute) {
             $document.scrollTo(0, 0);
