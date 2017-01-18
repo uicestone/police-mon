@@ -4,167 +4,66 @@
         <div class="col-md-12">
             <div class="panel panel-default panel-minimal">
                 <div class="divider divider-md"></div>
-                <div class="panel-heading">案件数量</div>
+                <div class="panel-heading text-center"><h3>派出所忙闲情况</h3></div>
                 <div class="panel-body">
-                    <div data-echarts data-options="combo.options" style="height: 400px;"></div>
+                    <div data-echarts data-options="stationHeatmap.options" style="height:330px"></div>
                     <div class="divider divider-lg"></div>
+                    <div data-echarts data-options="roomUsage.options" style="height:330px"></div>
+                </div>
+            </div>
+            <div class="panel panel-default panel-minimal">
+                <div class="divider divider-md"></div>
+                <div class="panel-heading text-center"><h3>嫌疑对象统计</h3></div>
+                <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3 box-stats">
-                            <span class="box-desc">当日嫌疑人数量</span>
+                            <span class="box-desc">近7日嫌疑人数量</span>
                             <p class="box-num">4,268</span></p>
                             <div data-echarts data-options="smline1.options" class="sm-charts" style="height: 50px; width:100px;"></div>
                         </div>
                         <div class="col-md-3 box-stats">
-                            <span class="box-desc">当日涉黄嫌疑人数量</span>
+                            <span class="box-desc">近7日涉黄嫌疑人数量</span>
                             <p class="box-num">3,239</span></p>
                             <div data-echarts data-options="smline2.options" class="sm-charts" style="height: 50px; width:100px;"></div>
                         </div>
                         <div class="col-md-3 box-stats">
-                            <span class="box-desc">当日涉赌嫌疑人数量</span>
+                            <span class="box-desc">近7日涉赌嫌疑人数量</span>
                             <p class="box-num">2,922</span></p>
                             <div data-echarts data-options="smline3.options" class="sm-charts" style="height: 50px; width:100px;"></div>
                         </div>
                         <div class="col-md-3 box-stats no-border">
-                            <span class="box-desc">当日涉毒嫌疑人数量</span>
+                            <span class="box-desc">近7日涉毒嫌疑人数量</span>
                             <p class="box-num">1,093</span></p>
                             <div data-echarts data-options="smline4.options" class="sm-charts" style="height: 50px; width:100px;"></div>
                         </div>
                     </div>
                     <div class="divider divider-lg"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div data-echarts data-options="enterSources.options" style="height:400px"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div data-echarts data-options="exitType.options" style="height:400px"></div>
+                        </div>
+                    </div>
+                    <div class="divider divider-lg"></div>
                 </div>
             </div>
-        </div>
-    </div>
-
-
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body padding-lg">
+            <div class="panel panel-default panel-minimal">
+                <div class="divider divider-md"></div>
+                <div class="panel-heading text-center"><h3>办结案件统计</h3></div>
+                <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-8">
-                            <div class="panel">
-                                <div class="panel-heading text-center">离所嫌疑人统计</div>
-                                <div class="divider divider-lg"></div>
-                                <div class="panel-body">
-                                    <div class="row text-center metrics">
-                                        <div class="col-xs-6 col-md-3">
-                                            <span class="metric">452</span>
-                                            <span class="metric-info">临时离所对象数量</span>
-                                        </div>
-                                        <div class="col-xs-6 col-md-3">
-                                            <span class="metric">372</span>
-                                            <span class="metric-info">行政拘留对象数量</span>
-                                        </div>                                
-                                        <div class="col-xs-6 col-md-3">
-                                            <span class="metric">361</span>
-                                            <span class="metric-info">强制戒毒对象数量</span>
-                                        </div>
-                                        <div class="col-xs-6 col-md-3">
-                                            <span class="metric">172</span>
-                                            <span class="metric-info">刑事拘留对象数量</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div data-echarts data-options="pie.options" style="height: 180px;"></div>
-                                    </div>
-                                </div>
-                            </div>                            
+                        <div class="col-md-6">
+                            <div data-echarts data-options="closeType.options" style="height:400px"></div>
                         </div>
-                        <div class="col-lg-4">
-                            <section class="panel">
-                                <div class="panel-heading">在所嫌疑对象状态汇总</div>
-                                <div class="divider divider-md"></div>
-                                <div class="panel-body">
-                                    <div class="divider divider-md"></div>
-                                    <div class="progressbar-container">
-                                        <uib-progressbar class="progressbar-xs" value="34" type="success"></uib-progressbar>
-                                        <p class="desc">正在候问看管 <span class="pull-right color-success">34%</span></p>
-                                    </div>
-                                    <div class="progressbar-container">
-                                        <uib-progressbar class="progressbar-xs" value="68" type="info"></uib-progressbar>
-                                        <p class="desc">正在讯（询）问 <span class="pull-right color-info">68%</span></p>
-                                    </div>
-                                    <div class="progressbar-container">
-                                        <uib-progressbar class="progressbar-xs" value="48" type="danger"></uib-progressbar>
-                                        <p class="desc">正在等候室内看管 <span class="pull-right color-danger">48%</span></p>
-                                    </div>
-                                    <div class="progressbar-container">
-                                        <uib-progressbar class="progressbar-xs" value="77" type="warning"></uib-progressbar>
-                                        <p class="desc">临时离所 <span class="pull-right color-warning">77%</span></p>
-                                    </div>
-                                    <div class="progressbar-container">
-                                        <uib-progressbar class="progressbar-xs" value="55" type="primary"></uib-progressbar>
-                                        <p class="desc">办结未离所 <span class="pull-right color-primary">55%</span></p>
-                                    </div>                                      
-                                </div>
-                            </section>
-                        </div>        
+                        <div class="col-md-6">
+                            <div data-echarts data-options="punishRate.options" style="height:400px"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <div class="row">
-       <!-- Stats -->
-        <!-- <div class="col-lg-3 col-xsm-6">
-            <div class="panel panel-box">
-                <div class="panel-top">
-                    <span class="zmdi zmdi-local-airport color-success"></span>
-                </div>
-                <div class="panel-info">
-                    <span translate="GROWTH"></span>
-                </div>
-                <div class="panel-bottom bg-light">
-                    <span>36 <span class="size-h4">%</span></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xsm-6">
-            <div class="panel panel-box">
-                <div class="panel-top">
-                    <i class="zmdi zmdi-accounts color-info"></i>
-                </div>
-                <div class="panel-info">
-                    <span translate="NEW_USERS"></span>
-                </div>
-                <div class="panel-bottom bg-light">
-                    <span>22 <span class="size-h4">%</span></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xsm-6">
-            <div class="panel panel-box">
-                <div class="panel-top">
-                    <i class="zmdi zmdi-money color-warning"></i>
-                </div>
-                <div class="panel-info">
-                    <span translate="PROFIT"></span>
-                </div>
-                <div class="panel-bottom bg-light">
-                    <span>37 <span class="size-h4">k</span></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-xsm-6">
-            <div class="panel panel-box">
-                <div class="panel-top">
-                    <i class="zmdi zmdi-shopping-cart color-danger"></i>
-                </div>
-                <div class="panel-info">
-                    <span translate="SALES"></span>
-                </div>
-                <div class="panel-bottom bg-light">
-                    <span>21 <span class="size-h4">k</span></span>
-                </div>
-            </div>
-        </div> -->
-        <!-- end stats -->          
-    </div>
-
 </div>
     
