@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app.station')
-    .controller('stationMapCtrl', ['$scope', '$timeout', stationMapCtrl]);
+    .controller('stationMapCtrl', ['$scope', '$timeout', 'beaconService', stationMapCtrl]);
 
-    function stationMapCtrl($scope, $timeout) {
+    function stationMapCtrl($scope, $timeout, beaconService) {
 
         $scope.targets = [
             {"id":1, "level":"2", "category":"1", "space":"办公室（1）", "name":"张三"},
@@ -182,6 +182,20 @@
             $scope.isSpaceListOpen = false;
         }
 
+        beaconService.onRssiUpdate(function(rssi) {
+
+            $scope.targets[8].y = -rssi/3 - 6;
+            $scope.$apply();
+
+            if($scope.targets[8].y > 16) {
+                $('#alarm').get(0).play();
+            }
+            else {
+                $('#alarm').get(0).pause();
+            }
+
+            console.log(rssi, $scope.targets[8].y);
+        });
     }
 
 })();

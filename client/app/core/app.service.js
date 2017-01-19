@@ -2,7 +2,8 @@
     'use strict';
 
     var module = angular.module('app')
-        .service('suspectService', [suspectService]);
+        .service('suspectService', [suspectService])
+        .service('beaconService', [beaconService]);
     
     function suspectService() {
 
@@ -156,6 +157,80 @@
         this.get = function(id) {
             return suspects.filter(suspect => suspect.id === id)[0];
         }
+    }
+
+    function beaconService() {
+        var ws = new WebSocket('ws://192.168.4.1:8080');
+        var reader = new FileReader();
+        
+        this.onData = function(dataCallback) {
+            this.dataCallback = dataCallback;
+        };
+
+        this.onRssiUpdate = function(rssiCallback) {
+            this.rssiCallback = rssiCallback;
+        };
+
+        ws.onmessage = event => {
+
+            if ((event.data.size == 0) || (typeof event.data != "object")) {
+                return;
+            }
+
+            reader.readAsBinaryString(event.data);
+        }
+
+        reader.addEventListener("loadend", () => {
+            
+            var data = reader.result.split(/\r\n/)
+                .filter(line => line.length > 0)
+                .map(line => Array.from(line).map(byte => byte.charCodeAt(0)))
+                .map(line => {
+                    var data = line.slice(10, line.length);
+                    return {
+                        length: line[1],
+                        type: line[2],
+                        mac: line.slice(3, 8).map(byte => byte.toString(16)).join(':'),
+                        rssi: line[9] - 255,
+                        ver: data[17],
+                        uuid: [data[5], data[6]],
+                        temperature: data[18],
+                        x: data[20],
+                        y: data[21],
+                        z: data[22],
+                        currentMotionDuration: data[23],
+                        lastMotionDuration: data[24],
+                        battery: data[25],
+                        measuredPower: data[26],
+                        data: data,
+                        dataString: data.join(' ')
+                    }
+                });
+
+            if(this.dataCallback) {
+                this.dataCallback(data);
+            }
+
+            // let data = Array.from(reader.result).map(byte => {
+            //  return byte.match(/[\r\n]/) ? byte : byte.charCodeAt(0).toString(16);
+            // })
+            // .join('')
+            // .split(/[\r\n]+/).filter(line => line.length > 0);
+
+            data.filter(line => {
+                return line.mac === '12:3b:6a:1a:83'
+                // && line.type === 0
+                && line.data.length === 27
+            }).forEach(line => {
+                if(this.rssiCallback) {
+                    this.rssiCallback(line.rssi);
+                }
+                // console.log(line.rssi);
+                // context.fillRect(x, -line.rssi, 1, 1);
+                // console.log(line.uuid);
+                return line;
+            });
+        });
     }
 
 })();
