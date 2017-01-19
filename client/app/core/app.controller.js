@@ -50,6 +50,7 @@
             .then(function(device) {
                 console.log(device);
             }, function(err) {
+                console.error(err);
                 $scope.bluetoothEnabled = false;
                 $scope.$apply();
             });
