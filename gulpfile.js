@@ -114,8 +114,10 @@ gulp.task('inject', function() {
 gulp.task('copy', function() {
     log('Copying assets');
 
+    var assets = [].concat(config.assetsLazyLoad, config.assetsToCopy);
+
     return gulp
-        .src(config.assets, {base: config.client})
+        .src(assets, {base: config.client})
         .pipe(gulp.dest(config.dist + '/'));
 });
 
@@ -199,7 +201,7 @@ function startBrowserSync(opt) {
     switch(opt) {
         case 'dist':
             log('Serving dist app');
-            serveDistApp();
+            // serveDistApp();
             break;
         case 'docs':
             log('Serving docs');
@@ -225,6 +227,7 @@ function startBrowserSync(opt) {
             '!' + config.sass,
             config.tmp + '/**/*.css'
         ];
+        options.open = false;
 
         browserSync(options);
     }
@@ -236,6 +239,7 @@ function startBrowserSync(opt) {
             ]
         };
         options.files = [];
+        options.open = false;
 
         browserSync(options);
     }

@@ -31,37 +31,35 @@
                     <div class="col-lg-8 col-lg-offset-2">
 
                         <div ng-controller="TooltipDemo" ng-cloak>
-                            <md-content layout-padding="">
-                                <div class="text-center" style="padding-top: 40px;">
-                                    <md-button class="md-fab " aria-label="Insert Drive">
-                                        <md-icon class="zmdi zmdi-file" style="width: 24px; height: 24px;"></md-icon>
-                                        <md-tooltip md-visible="demo.showTooltip" md-direction="{{demo.tipDirection}}">
-                                            Insert Drive
-                                        </md-tooltip>
-                                    </md-button>
-                                </div>
-
-
-                                <div class="callout callout-info">The tooltip is visible when the button is hovered, focused, or touched. </div>
-                                <div class="callout callout-success">
-                                    <span>Additionally, the Tooltip's <code>md-visible</code> attribute can use data-binding to
-                                    programmatically show/hide itself. Toggle the checkbox below...</span>
-                                </div>
-                                    <md-checkbox ng-model="demo.showTooltip" style="padding-left:30px;">
+                            <div class="text-center" style="padding-top: 40px;">
+                                <md-button class="md-fab " aria-label="Insert Drive">
+                                    <md-icon class="material-icons">insert_drive_file</md-icon>
+                                    <md-tooltip md-visible="demo.showTooltip" md-direction="{{demo.tipDirection}}">
                                         Insert Drive
-                                    </md-checkbox>
+                                    </md-tooltip>
+                                </md-button>
+                            </div>
 
-                                <div class="callout callout-success">
-                                    <p><code>md-direction</code> attribute can used to dynamically change the direction of the tooltip.<br>
-                                    Note: the direction default value is 'bottom'. </p>
-                                </div>
-                                <md-radio-group class="ui-md-radio-group-inline" ng-model="demo.tipDirection">
-                                     <md-radio-button value="left"> Left </md-radio-button>
-                                     <md-radio-button value="top">Top</md-radio-button>
-                                     <md-radio-button value="bottom" class="md-primary">Bottom</md-radio-button>
-                                     <md-radio-button value="right">Right</md-radio-button>
-                                 </md-radio-group>
-                            </md-content>
+
+                            <div class="callout callout-info">The tooltip is visible when the button is hovered, focused, or touched. </div>
+                            <div class="callout callout-success">
+                                <span>Additionally, the Tooltip's <code>md-visible</code> attribute can use data-binding to
+                                programmatically show/hide itself. Toggle the checkbox below...</span>
+                            </div>
+                                <md-checkbox ng-model="demo.showTooltip" style="padding-left:30px;">
+                                    Insert Drive
+                                </md-checkbox>
+
+                            <div class="callout callout-success">
+                                <p><code>md-direction</code> attribute can used to dynamically change the direction of the tooltip.<br>
+                                Note: the direction default value is 'bottom'. </p>
+                            </div>
+                            <md-radio-group class="ui-md-radio-group-inline" ng-model="demo.tipDirection">
+                                 <md-radio-button value="left"> Left </md-radio-button>
+                                 <md-radio-button value="top">Top</md-radio-button>
+                                 <md-radio-button value="bottom" class="md-primary">Bottom</md-radio-button>
+                                 <md-radio-button value="right">Right</md-radio-button>
+                             </md-radio-group>
                         </div>
                     
                     </div>
@@ -305,7 +303,7 @@
                             <div class="ih-item ih-material">
                                 <a href="javascript:;">
                                     <div class="img">
-                                        <img src="images/assets/600_400-1.jpg" alt="">
+                                        <img src="assets/images/assets/600_400-1.jpg" alt="">
                                     </div>
                                     <div class="info">
                                         <div class="info-mask bg-primary"></div>
@@ -323,7 +321,7 @@
                             <div class="ih-item ih-material">
                                 <a href="javascript:;">
                                     <div class="img">
-                                        <img src="images/assets/600_400-2.jpg" alt="">
+                                        <img src="assets/images/assets/600_400-2.jpg" alt="">
                                     </div>
                                     <div class="info">
                                         <div class="info-mask bg-info"></div>
@@ -341,7 +339,7 @@
                             <div class="ih-item ih-material">
                                 <a href="javascript:;">
                                     <div class="img">
-                                        <img src="images/assets/600_400-3.jpg" alt="">
+                                        <img src="assets/images/assets/600_400-3.jpg" alt="">
                                     </div>
                                     <div class="info">
                                         <div class="info-mask bg-dark"></div>
@@ -422,177 +420,6 @@
 
     <div class="row ui-section">
         <div class="col-lg-8 clearfix">
-            <h2 class="section-header">Modal</h2>
-        </div>
-        <div class="col-md-12">
-            <section class="panel panel-default">
-                <div class="panel-body padding-xl" data-ng-controller="ModalDemoCtrl">
-                    <div class="col-lg-8 col-lg-offset-2">
-
-                        <script type="text/ng-template" id="myModalContent.html">
-                            <div class="modal-header">
-                                <h3>I am a modal!</h3>
-                            </div>
-                            <div class="modal-body">
-                                <span ng-repeat="item in items" class="list-unstyled">
-                                    <label class="ui-radio"><input name="radio1" type="radio" value="{{ item }}"    ng-checked="selected.item === item" ng-click="selected.item = item"><span>{{ item }}</span></label>
-                                </span>
-                                <div class="callout callout-info">
-                                    Selected: <b>{{ selected.item }}</b>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button ui-wave class="btn btn-flat btn-default" ng-click="cancel()">Cancel</button>
-                                <button ui-wave class="btn btn-flat btn-primary" ng-click="ok()">OK</button>
-                            </div>
-                        </script>
-
-                        <md-button class="md-raised btn-w-md md-primary" ng-click="open()">Open me!</md-button>
-                        <span class="space"></span>
-                        <md-button class="md-raised btn-w-md md-accent" ng-click="open('lg')">Large modal</md-button>
-                        <span class="space"></span>
-                        <md-button class="md-raised btn-w-md md-accent" ng-click="open('sm')">Small modal</md-button>
-                        <span class="space"></span>
-                        <md-button class="md-raised btn-w-md" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled }})</md-button>
-                        <div class="callout callout-info">
-                            <p>Selection from a modal: <strong>{{ selected }}</strong></p>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-
-
-
-    <div class="row ui-section">
-        <div class="col-lg-8 clearfix">
-            <h2 class="section-header">Pagination</h2>
-        </div>
-        <div class="col-md-12" data-ng-controller="PaginationDemoCtrl">
-            <div class="row">
-                <div class="col-md-6">
-                    <section class="panel panel-default panel-labeled">
-                        <div class="panel-body">
-                            <uib-pagination class="pagination-sm" direction-links="true" total-items="totalItems" ng-model="currentPage" num-pages="smallnumPages" previous-text="&lsaquo;" next-text="&rsaquo;"></uib-pagination>
-                            <br>
-                            <uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
-                            <br>
-                            <uib-pagination class="pagination-lg" total-items="totalItems" ng-model="currentPage" previous-text="&lsaquo;" next-text="&rsaquo;"></uib-pagination>
-                            <br>
-                            <md-button class="md-raised btn-w-md md-primary" ng-click="setPage(3)">Set page to: 3</md-button><div class="divider"></div>
-                            <span class="panel-label">Sizing</span>             
-                        </div>
-                    </section>                    
-                </div>
-                <div class="col-md-6">
-                    <section class="panel panel-default panel-labeled">
-                        <div class="panel-body">
-                            <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;"></uib-pagination>
-                            <br>
-                            <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" previous-text="&lsaquo;" next-text="&rsaquo;"></uib-pagination>
-                            <div class="callout callout-info">
-                                <p class="no-margin">Page: {{bigCurrentPage}} / {{numPages}}</p>
-                                <span class="panel-label">Limit the Maximum Visible Buttons</span>
-                            </div>
-                        </div>
-                    </section>                    
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row ui-section">
-        <div class="col-lg-8 clearfix">
-            <h2 class="section-header">Tabs</h2>
-        </div>
-        <div class="col-md-12">
-            <section class="panel panel-default">
-                <div class="panel-body" data-ng-controller="TabsDemoCtrl">
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="section-header">
-                                <h4>Simple Tabs</h4>
-                            </div>
-                            <uib-tabset class="ui-tab">
-                                <uib-tab heading="Static title">Static content here. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil, quidem, officiis, et ex laudantium sed cupiditate voluptatum libero nobis sit illum voluptates beatae ab et at.</uib-tab>
-                                <uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
-                                    {{tab.content}}
-                                </uib-tab>
-                            </uib-tabset>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="section-header">
-                                <h4>Justified Tabs</h4>
-                            </div>
-                            <uib-tabset justified="true" class="ui-tab">
-                                <uib-tab heading="Justified">Justified content</uib-tab>
-                                <uib-tab heading="SJ">Short Labeled Justified content</uib-tab>
-                                <uib-tab heading="Long Justified">Long Labeled Justified content</uib-tab>
-                            </uib-tabset>
-                        </div>
-                    </div>
-
-                    <div class="divider divider-lg"></div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="section-header">
-                                <h4>Horizontal Tabs</h4>
-                            </div>
-                            <div class="ui-tab-container ui-tab-horizontal">
-                                <uib-tabset justified="false" class="ui-tab">
-                                    <uib-tab heading="Home dolor">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, aspernatur, eum fugit officiis numquam iste aut illo quos pariatur Eligendi, veniam, accusamus.</p>
-                                        <p>Consectetur adipisicing elit. Reprehenderit enim obcaecati inventore, beatae corporis voluptate, repudiandae voluptatum nesciunt ipsam provident aliquam accusamus assumenda est, veritatis molestias velit non minus laudantium.</p>
-                                    </uib-tab>
-                                    <uib-tab heading="Quod ea">
-                                        <p>Quod ea vel dolores earum veritatis quae sunt tempore odit molestias sit optio quaerat cupiditate iure repudiandae illum doloremque consectetur incidunt!</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, aspernatur, eum fugit officiis numquam iste aut illo quos pariatur Eligendi, veniam, accusamus.</p>
-                                    </uib-tab>
-                                    <uib-tab heading="Earum sequi">
-                                        <p>Blanditiis tenetur harum distinctio voluptate asperiores non magnam delectus. Consequatur, deleniti rem magnam possimus necessitatibus iusto suscipit mollitia rerum.</p>
-                                        <p>Quod ea vel dolores earum veritatis quae sunt tempore odit molestias sit optio quaerat cupiditate iure repudiandae illum doloremque consectetur incidunt!</p>
-                                    </uib-tab>
-                                </uib-tabset>
-                            </div>                     
-                        </div>
-                        <div class="col-md-6">
-                            <div class="section-header">
-                                <h4>Vertical Tabs</h4>
-                            </div>
-                            <div class="ui-tab-container ui-tab-vertical">
-                                <uib-tabset class="ui-tab">
-                                    <uib-tab heading="Home dolor">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, aspernatur, eum fugit officiis numquam iste aut illo quos pariatur Eligendi, veniam, accusamus.</p>
-                                        <p>Consectetur adipisicing elit. Reprehenderit enim obcaecati inventore, beatae corporis voluptate, repudiandae voluptatum nesciunt ipsam provident aliquam accusamus assumenda est, veritatis molestias velit non minus laudantium.</p>
-                                        <p>Blanditiis tenetur harum distinctio voluptate asperiores non magnam delectus. Consequatur, deleniti rem magnam possimus necessitatibus iusto suscipit mollitia rerum.</p>
-                                    </uib-tab>
-                                    <uib-tab heading="Quod ea">
-                                        <p>Quod ea vel dolores earum veritatis quae sunt tempore odit molestias sit optio quaerat cupiditate iure repudiandae illum doloremque consectetur incidunt!</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, aspernatur, eum fugit officiis numquam iste aut illo quos pariatur Eligendi, veniam, accusamus.</p>
-                                        <p>Consectetur adipisicing elit. Reprehenderit enim obcaecati inventore, beatae corporis voluptate, repudiandae voluptatum nesciunt ipsam provident aliquam accusamus assumenda est, veritatis molestias velit non minus laudantium.</p>
-                                    </uib-tab>
-                                    <uib-tab heading="Earum sequi">
-                                        <p>Blanditiis tenetur harum distinctio voluptate asperiores non magnam delectus. Consequatur, deleniti rem magnam possimus necessitatibus iusto suscipit mollitia rerum.</p>
-                                        <p>Quod ea vel dolores earum veritatis quae sunt tempore consectetur adipisicing elit. Suscipit, odit molestias sit optio quaerat cupiditate iure repudiandae illum doloremque consectetur incidunt!</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, aspernatur, eum fugit officiis numquam iste aut illo quos pariatur Eligendi, veniam, accusamus.</p>
-                                    </uib-tab>
-                                </uib-tabset>
-                            </div>                     
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-        </div>
-    </div>
-
-
-    <div class="row ui-section">
-        <div class="col-lg-8 clearfix">
             <h2 class="section-header">Labels & Badges</h2>
         </div>
         <div class="col-md-12">
@@ -643,133 +470,6 @@
         </div>
     </div>
 
-
-    <div class="row ui-section">
-        <div class="col-lg-8 clearfix">
-            <h2 class="section-header">Popover & Tooltip</h2>
-        </div>
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-6">
-                    <section class="panel panel-default panel-labeled">
-                        <div class="panel-body text-center">
-                            <button ui-wave popover-placement="top" popover-title="The Popover Title" uib-popover="On the Top! Here' goes the popover content..." popover-append-to-body="true" class="btn btn-w-lg btn-danger btn-gap">Popover on Top</button>
-                            <br>
-                            <button ui-wave popover-placement="right" popover-title="The Popover Title" uib-popover="On the Right! Here' goes the popover content..." popover-append-to-body="true" class="btn btn-w-lg btn-warning btn-gap">Popover on Right</button>
-                            <br>
-                            <button ui-wave popover-placement="bottom" popover-title="The Popover Title" uib-popover="On the Bottom! Here' goes the popover content..." popover-append-to-body="true" class="btn btn-w-lg btn-info btn-gap">Popover on Bottom</button>
-                            <br>
-                            <button ui-wave popover-placement="left" popover-title="The Popover Title" uib-popover="On the Left! Here' goes the popover content..." popover-append-to-body="true" class="btn btn-w-lg btn-success btn-gap">Popover on Left</button>
-                            <br>
-                            <button ui-wave uib-popover="On mouse enter!" popover-trigger="mouseenter" class="btn btn-w-lg btn-primary btn-gap">Popover on Mouseenter</button>
-                            <div class="divider"></div>
-                            <input type="text" value="Popover on Click" uib-popover="I appeared on focus! Click away and I'll vanish..."    popover-trigger="focus" class="form-control">
-                            <span class="panel-label">Popover</span>
-                        </div>
-                    </section>
-                </div>
-                <div class="col-md-6">
-                    <section class="panel panel-default panel-labeled">
-                        <div class="panel-body text-center">
-                            <button ui-wave class="btn btn-w-lg btn-default btn-gap" tooltip-placement="top" uib-tooltip="On the Top!" tooltip-append-to-body="true">Tooltip on Top</button>
-                            <br>
-                            <button ui-wave class="btn btn-w-lg btn-primary btn-gap" tooltip-placement="left" uib-tooltip="On the Left!" tooltip-append-to-body="true">Tooltip on Left</button>
-                            <br>
-                            <button ui-wave class="btn btn-w-lg btn-success btn-gap" tooltip-placement="right" uib-tooltip="On the Right!" tooltip-append-to-body="true">Tooltip on Right</button>
-                            <br>
-                            <button ui-wave class="btn btn-w-lg btn-danger btn-gap" tooltip-animation="false" uib-tooltip="I don't fade. :-(" tooltip-append-to-body="true">Without Animation</button>
-                            <br>
-                            <button ui-wave class="btn btn-w-lg btn-warning btn-gap" tooltip-popup-delay='1000' uib-tooltip="Appears with delay" tooltip-append-to-body="true">Tooltip Delayed</button>
-                            <br>
-                            <button ui-wave class="btn btn-w-lg btn-info btn-gap" tooltip-placement="bottom" uib-tooltip="On the Bottom!" tooltip-append-to-body="true">Tooltip on Bottom</button>
-                            <span class="panel-label">Tooltip</span>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-    <div class="row ui-section">
-        <div class="col-lg-8 clearfix">
-            <h2 class="section-header">Accordion or Collapse</h2>
-        </div>
-        <div class="col-md-12">
-            <div class="row" data-ng-controller="AccordionDemoCtrl">
-                <div class="col-md-6">
-                    <section class="panel panel-default panel-labeled">
-                        <div class="panel-body">
-                            <uib-accordion close-others="oneAtATime" class="ui-accordion">
-                                <uib-accordion-group heading="Static Header, initially expanded" is-open="status.isFirstOpen">
-                                    This content is straight in the template.
-                                </uib-accordion-group>
-                                <uib-accordion-group heading="{{group.title}}" ng-repeat="group in groups">
-                                    {{group.content}}
-                                </accordion-group>
-                            </uib-accordion>
-                            <span class="panel-label">Accordion</span>
-                        </div>
-                    </section>
-                </div>
-                <div class="col-md-6">
-                    <section class="panel panel-default panel-labeled">
-                        <div class="panel-body">                
-                            <uib-accordion close-others="!oneAtATime" class="ui-accordion">
-                                <uib-accordion-group heading="Static Header, initially expanded" is-open="status.isFirstOpen1">
-                                This content is straight in the template.
-                                </uib-accordion-group>
-                                <uib-accordion-group heading="{{group.title}}" ng-repeat="group in groups">
-                                    {{group.content}}
-                                </accordion-group>
-                            </uib-accordion>
-                            <span class="panel-label">Collapse</span>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <div class="row ui-section">
-        <div class="col-lg-8 clearfix">
-            <h2 class="section-header">Collapse</h2>
-        </div>
-        <div class="col-md-12">
-            <section class="panel panel-default">
-                <div class="panel-body padding-xl" data-ng-controller="CollapseDemoCtrl">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <md-button class="md-raised btn-w-md md-primary" ng-click="isCollapsed = !isCollapsed">Toggle collapse</md-button>
-                        <div class="divider divider-md"></div>
-                        <div uib-collapse="isCollapsed">
-                            <div class="well well-lg">Some content</div> 
-                        </div>  
-                    </div>          
-                </div>
-            </section>
-
-        </div>
-    </div>
-
-
-    <div class="row ui-section">
-        <div class="col-lg-8 clearfix">
-            <h2 class="section-header">Alert</h2>
-        </div>
-        <div class="col-md-12">
-            <section class="panel panel-default">
-                <div class="panel-body" data-ng-controller="AlertDemoCtrl">
-                    <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
-                    <md-button class="md-raised btn-w-md md-primary" ng-click="addAlert()">Add Alert</md-button>
-                </div>
-            </section>
-        </div>
-    </div>
 
     <div class="row ui-section">
         <div class="col-lg-8 clearfix">

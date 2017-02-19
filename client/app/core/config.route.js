@@ -2,19 +2,20 @@
     'use strict';
 
     angular.module('app')
-        .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-            var routes, setRoutes;
+        .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider',
+                function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+                var routes, setRoutes;
 
             routes = [
                 'suspect/list', 'suspect/wizard', 'station/map',
                 'ui/cards', 'ui/typography', 'ui/buttons', 'ui/icons', 'ui/grids', 'ui/widgets', 'ui/components', 'ui/timeline', 'ui/lists', 'ui/pricing-tables',
                 'map/maps',
                 'table/static', 'table/dynamic', 'table/responsive',
-                'form/elements', 'form/layouts', 'form/validation', 'form/wizard',
+                'form/elements', 'form/layouts', 'form/validation', 'form/wizard', 'form/data',
                 'chart/echarts', 'chart/echarts-line', 'chart/echarts-bar', 'chart/echarts-pie', 'chart/echarts-scatter', 'chart/echarts-more',
                 'page/404', 'page/500', 'page/blank', 'page/forgot-password', 'page/invoice', 'page/lock-screen', 'page/profile', 'page/signin', 'page/signup',
                 'app/calendar'
-            ]
+            ];
 
             setRoutes = function(route) {
                 var config, url;
@@ -33,8 +34,8 @@
 
             $urlRouterProvider
                 .when('', '/dashboard')
+                .when('/', '/dashboard')
                 .otherwise('/page/404');
-
 
             $stateProvider.state('dashboard', {
                 url: '/dashboard',

@@ -10,8 +10,8 @@
                      'bg-info': ['14','24','34'].indexOf(main.skin) >= 0,
                      'bg-warning': ['15','25','35'].indexOf(main.skin) >= 0,
                      'bg-danger': ['16','26','36'].indexOf(main.skin) >= 0 }">
-        <a href="#/">
-            <span class="logo-icon zmdi zmdi-view-dashboard"></span>
+        <a href="#!/">
+            <span class="logo-icon material-icons">dashboard</span>
             <span class="logo-text">{{main.brand}}</span>
         </a>
     </div>
@@ -25,102 +25,61 @@
 
     <div class="top-nav">
         <ul class="nav-left list-unstyled">
+            <li><md-button class="header-btn toggle-min" data-toggle-nav-collapsed-min aria-label="toggle-nav-collapsed-min"><i class="material-icons">menu</i></md-button></li>
             <li>
-                <a href="#/"
-                   data-toggle-nav-collapsed-min
-                   md-button
-                   aria-label="toggle-nav-collapsed-min"
-                   class="toggle-min"><i class="zmdi zmdi-menu"></i></a>
+                <md-menu md-position-mode="left bottom">
+                    <md-button class="header-btn" aria-label="menu" ng-click="$mdOpenMenu($event)">
+                        <i class="material-icons">email</i>
+                        <span class="badge">3</span>
+                    </md-button>
+                    <md-menu-content class="top-header-dropdown" width="4">
+                        <md-list class="md-dense">
+                            <md-list-item class="md-2-line" ng-click="null">
+                                <md-icon class="material-icons">mail_outline</md-icon>
+                                <div class="md-list-item-text">
+                                    <h3>New mail from David</h3>
+                                    <p>5 minutes ago</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line" ng-click="null">
+                                <md-icon class="material-icons">chat_bubble_outline</md-icon>
+                                <div class="md-list-item-text">
+                                    <h3>Message from Jane</h3>
+                                    <p>15 minutes ago</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line" ng-click="null">
+                                <md-icon class="material-icons">person_outline</md-icon>
+                                <div class="md-list-item-text">
+                                    <h3>New member John joined</h3>
+                                    <p>1 hour ago</p>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </md-menu-content>
+                </md-menu>
             </li>
             <li class="search-box visible-md visible-lg">
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="zmdi zmdi-search"></i></span>
+                    <span class="input-group-addon"><i class="material-icons">search</i></span>
                     <input type="text" class="form-control" placeholder="{{ 'SEARCH' | translate }}">
                     <span class="input-bar"></span>
-                </div>
-            </li>
-            <li class="dropdown" uib-dropdown is-open="status.isopenEmail">
-                <a href="javascript:;" class="dropdown-toggle" uib-dropdown-toggle ng-disabled="disabled" md-button aria-label="email">
-                    <i class="zmdi zmdi-email"></i>
-                    <span class="badge badge-danger">3</span>
-                </a>
-                <div class="with-arrow panel panel-default dropdown-menu-scaleIn" uib-dropdown-menu>
-                    <div class="panel-heading"> 你有三条未读消息 </div>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <a href="javascript:;" class="media">
-                                <span class="media-left media-icon">
-                                    <span class="btn-icon btn-icon-round btn-success"><i class="zmdi zmdi-email"></i></span>
-                                </span>
-                                <div class="media-body">
-                                    <span class="block">来自 张警官 的消息</span>
-                                    <span class="text-muted block">2分钟以前</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="javascript:;" class="media">
-                                <span class="media-left media-icon">
-                                    <span class="btn-icon btn-icon-round btn-info"><i class="zmdi zmdi-email"></i></span>
-                                </span>
-                                <div class="media-body">
-                                    <span class="block">来自 闵行分局 的消息</span>
-                                    <span class="text-muted">3小时以前</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="javascript:;" class="media">
-                                <span class="media-left media-icon">
-                                    <span class="btn-icon btn-icon-round btn-danger"><i class="zmdi zmdi-email"></i></span>
-                                </span>
-                                <div class="media-body">
-                                    <span class="block">来自 实习生警员 的消息</span>
-                                    <span class="text-muted">9小时以前</span>
-                                </div>
-                            </a>
-                        </li>                         
-                    </ul>
-                    <div class="panel-footer">
-                        <a href="#/mail/inbox">查看全部消息</a>
-                    </div>
                 </div>
             </li>
         </ul> 
 
         <ul class="nav-right pull-right list-unstyled">
             <li>
-                <md-switch aria-label="Bluetooth" ng-model="$parent.bluetoothEnabled" ng-click="enableBluetooth()">
-                    <i class="zmdi zmdi-bluetooth"></i>
-                </md-switch>
-            </li>
-            <li class="dropdown text-normal nav-profile" uib-dropdown is-open="status.isopenProfile">
-                <a href="javascript:;" class="dropdown-toggle" uib-dropdown-toggle ng-disabled="disabled" md-button aria-label="profile">
-                    <img src="images/g1.jpg" alt="" class="img-circle img30_30">
-                    <span class="hidden-xs">
-                        <span data-translate="LISA"></span>
-                    </span>
-                </a>
-                <ul class="with-arrow pull-right dropdown-menu-scaleIn" uib-dropdown-menu>
-                    <li>
-                        <a href="#/">
-                            <i class="zmdi zmdi-home"></i>
-                            <span data-translate="DASHBOARD"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#/page/profile">
-                            <i class="zmdi zmdi-account"></i>
-                            <span data-translate="MY_PROFILE"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#/page/signin">
-                            <i class="zmdi zmdi-forward"></i>
-                            <span data-translate="LOG_OUT"></span>
-                        </a>
-                    </li>
-                </ul>
+                <md-menu md-position-mode="target-right target">
+                    <md-button class="header-btn" aria-label="menu" ng-click="$mdOpenMenu($event)">
+                        <img src="assets/images/g1.jpg" alt="" class="img-circle img30_30">
+                    </md-button>
+                    <md-menu-content class="top-header-dropdown" width="3">
+                        <md-menu-item><md-button aria-label="menu" ng-href="#!/"><md-icon class="material-icons">assignment</md-icon><span data-translate="DASHBOARD"></span></md-button></md-menu-item>
+                        <md-menu-item><md-button aria-label="menu" ng-href="#!/page/profile"><md-icon class="material-icons">lock_outline</md-icon><span data-translate="MY_PROFILE"></span></md-button></md-menu-item>
+                        <md-menu-item><md-button aria-label="menu" ng-href="#!/page/signin"><md-icon class="material-icons">keyboard_tab</md-icon><span data-translate="LOG_OUT"></span></md-button></md-menu-item>
+                    </md-menu-content>
+                </md-menu>
             </li>
         </ul>
     </div>

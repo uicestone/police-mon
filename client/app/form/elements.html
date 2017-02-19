@@ -119,7 +119,7 @@
                             <h4>Multi Column</h4>
                             <div class="radioButtondemoMultiColumn">
                                 <div class="divider divider-md"></div>
-                                <md-divider></md-divider>
+                                <md-divider ></md-divider>
                                 <md-radio-group ng-model="selectedIndex" >
                                     <div ng-repeat='person in contacts' class="row">
                                         <div flex layout='row' layout-padding layout-align="start center" >
@@ -128,7 +128,8 @@
                                             </div>
                                             <md-radio-button flex
                                                     ng-value="person.id"
-                                                    class="md-primary" >
+                                                    class="md-primary"
+                                                    style="margin-top: 16px;" >
                                                 {{person.fullName}}
                                             </md-radio-button>
                                         </div>
@@ -587,13 +588,6 @@
                         </div>
                         <div class="divider divider-dashed divider-lg pull-in"></div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2">Input with tooltip on focus</label>
-                            <div class="col-sm-10">
-                                <input uib-tooltip="Tooltip on top" type="text" class="form-control" data-toggle="tooltip" data-placement="top" tooltip-trigger="focus">
-                            </div>
-                        </div>
-                        <div class="divider divider-dashed divider-lg pull-in"></div>
-                        <div class="form-group">
                             <label for="" class="col-sm-2">Input with icons</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control">
@@ -705,214 +699,6 @@
                             </div>
                         </div>
                     </form>
-                </div>
-            </section>
-        </div>
-    </div>
-
-
-    <div class="row ui-section">
-        <div class="col-lg-8 clearfix">
-            <h2 class="section-header">Typeahead (Autocomplete)</h2>
-        </div>
-        <div class="col-md-12">
-            <section class="panel panel-default">
-                <div class="panel-body padding-xl" data-ng-controller="TypeaheadCtrl">
-                    <div class="row">
-                        <div class="col-lg-6 col-lg-offset-3">
-                            <div class="callout callout-info">
-                                <p>State is: {{selected}}</p>
-                            </div> 
-                            <div class="ui-typeahead">
-                                <input type="text" 
-                                       ng-model="selected"
-                                       uib-typeahead="state for state in states | filter:$viewValue | limitTo:8"
-                                       class="form-control"
-                                       placeholder="Search">
-                            </div>                    
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-
-
-    <div class="row ui-section">
-        <div class="col-lg-8 clearfix">
-            <h2 class="section-header">Datepicker</h2>
-        </div>
-        <div class="col-md-12">
-            <section class="panel panel-default">
-                <div class="panel-body padding-xl" data-ng-controller="DatepickerDemoCtrl">
-                    <div class="row">
-                        <div class="col-lg-4 col-lg-offset-2">
-                            <div class="input-group ui-datepicker">
-                                <input type="text" 
-                                       class="form-control"
-                                       uib-datepicker-popup="{{format}}"
-                                       ng-model="dt"
-                                       is-open="popup1.opened"
-                                       min-date="minDate"
-                                       max-date="maxDate"
-                                       datepicker-options="dateOptions"
-                                       date-disabled="disabled(date, mode)"
-                                       ng-required="true"
-                                       close-text="Close"
-                                       alt-input-formats="altInputFormats" />
-                                <span class="input-group-addon" ng-click="open1()"><i class="fa fa-calendar"></i></span>
-                            </div>
-                            <div class="callout callout-info">
-                                <p>Date is: {{dt | date:'fullDate'}}</p>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <p>
-                                Format:
-                                <span class="ui-select">
-                                    <select ng-model="format"
-                                    ng-options="f for f in formats"></select>
-                                </span>
-                            </p>
-                            <div class="divider"></div>
-                            <md-button class="md-raised btn-w-md md-primary" ng-click="today()">Today</md-button>
-                            <span class="space"></span>
-                            <md-button class="md-raised btn-w-md md-accent" ng-click="setDate(2009, 7, 24)">2009-07-24</md-button>
-                            <span class="space"></span>
-                            <div class="divider"></div>
-                            <md-button class="md-raised btn-w-md md-accent" ng-click="toggleMin()">Min date</md-button>
-                            <span class="space"></span>
-                            <md-button class="md-raised btn-w-md md-warn" ng-click="clear()">Clear</md-button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>     
-
-
-    <div class="row ui-section">
-        <div class="col-lg-8 clearfix">
-            <h2 class="section-header">Timepicker</h2>
-        </div>
-        <div class="col-md-12">
-            <section class="panel panel-default">
-                <div class="panel-body" data-ng-controller="TimepickerDemoCtrl">
-                    <div class="row">
-                        <div class="col-lg-4 col-lg-offset-2">
-                            <div ng-model="mytime" ng-change="changed()" style="display:inline-block;">
-                                <uib-timepicker class="ui-timepicker" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
-                            </div>                    
-                            <div class="callout callout-info">
-                                <p>Time is: {{mytime | date:'shortTime' }}</p>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6"> 
-                            <p>
-                                Hours step is: 
-                                <span class="space"></span>
-                                <span class="ui-select"><select ng-model="hstep" ng-options="opt for opt in options.hstep"></select></span>
-                            </p>
-                            <p>
-                                Minutes step is: 
-                                <span class="ui-select"><select ng-model="mstep" ng-options="opt for opt in options.mstep"></select></span>
-                            </p>
-                            <div class="divider divider-lg"></div>
-                            <md-button class="md-raised btn-w-md md-primary" ng-click="toggleMode()">12H / 24H</md-button>
-                            <div class="space"></div>
-                            <md-button class="md-raised btn-w-md md-accent" ng-click="update()">Set to 14:00</md-button>
-                            <div class="divider"></div>
-                            <md-button class="md-raised btn-w-md md-warn" ng-click="clear()">Clear</md-button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-
-
-    <div class="row ui-section">
-        <div class="col-lg-8 clearfix">
-            <h2 class="section-header">Rating</h2>
-        </div>
-        <div class="col-md-12" data-ng-controller="RatingDemoCtrl">
-            <div class="row">
-                <div class="col-md-6">
-                    <section class="panel panel-default">
-                        <div class="panel-body padding-xl">
-                            <uib-rating class="ui-rating size-h3"
-                            ng-model="rate"
-                            max="max"
-                            readonly="isReadonly"
-                            on-hover="hoveringOver(value)"
-                            on-leave="overStar = null"
-                            state-on="'fa fa-star'"
-                            state-off="'fa fa-star-o'"></uib-rating>
-                            <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
-
-                            <div class="callout callout-info">
-                                <p>Rate: <b>{{rate}}</b> - Readonly is: <i>{{isReadonly}}</i> - Hovering over: <b>{{overStar || "none"}}</b></p>
-                            </div>
-
-                            <md-button class="md-raised btn-w-md md-primary" ng-click="isReadonly = ! isReadonly">Toggle Readonly</md-button>
-                            <md-button class="md-raised btn-w-md" ng-click="rate = 0" ng-disabled="isReadonly">Clear</md-button>
-                        </div>
-                    </section>                    
-                </div>
-                <div class="col-md-6">
-                    <section class="panel panel-default panel-labeled">
-                        <div class="panel-body padding-xl">
-                            <div ng-init="x1 = 4">
-                                <uib-rating class="ui-rating size-h4 ui-rating-success"
-                                ng-model="x1"
-                                max="6"
-                                readonly="true"
-                                state-on="'fa fa-star'"
-                                state-off="'fa fa-star-o'"></uib-rating>
-                            </div>
-                            <div ng-init="x2 = 5">
-                                <uib-rating class="ui-rating size-h3 ui-rating-info"
-                                ng-model="x2"
-                                max="7"
-                                readonly="true"
-                                state-on="'fa fa-star'"
-                                state-off="'fa fa-star-o'"></uib-rating>
-                            </div>
-                            <div ng-init="x3 = 6">
-                                <uib-rating class="ui-rating size-h2 ui-rating-warning"
-                                ng-model="x3"
-                                max="8"
-                                readonly="true"
-                                state-on="'fa fa-star'"
-                                state-off="'fa fa-star-o'"></uib-rating>
-                            </div>
-                            <div ng-init="x4 = 7">
-                                <uib-rating class="ui-rating size-h1 ui-rating-danger"
-                                ng-model="x4"
-                                max="9"
-                                readonly="true"
-                                state-on="'fa fa-star'"
-                                state-off="'fa fa-star-o'"></uib-rating>
-                            </div>
-                            <span class="panel-label">Colorful and Sizing</span>
-                        </div>
-                    </section>                    
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-lg-8 clearfix">
-            <h2 class="section-header">Editor</h2>
-        </div>
-        <div class="col-md-12">
-            <section class="panel panel-default">
-                <div class="panel-body">
-                    <div text-angular ng-model="mailContent" class="ui-editor"></div>
                 </div>
             </section>
         </div>

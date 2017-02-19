@@ -128,7 +128,7 @@
             };
 
             highlightActive = function(links, path) {
-                path = '#' + path;
+                path = '#!' + path;
                 return angular.forEach(links, function(link) {
                     var $li, $link, href;
                     $link = angular.element(link);

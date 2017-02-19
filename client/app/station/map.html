@@ -2,11 +2,11 @@
     <div class="main">
         <div class="mall" ng-class="{'mall-content-open':isOpenContentArea}">
             <div class="surroundings" ng-class="{'surroundings-hidden':!showingSurroundings}">
-                <img class="surroundings-map" src="/images/maps/surroundings.svg" alt="Surroundings"/>
+                <img class="surroundings-map" src="/assets/images/maps/surroundings.svg" alt="Surroundings"/>
             </div>
             <div class="levels levels-selected-{{ selectedLevel }}" ng-class="{'levels-open':isExpanded}">
                 <div class="level level-{{ level.level }}" ng-repeat="level in levels" ng-class="{'level-current':selectedLevel == level.level || prevSelectedLevel == level.level, 'level-moveOutUp':movingOutDirection == 'Up' && prevSelectedLevel == level.level, 'level-moveOutDown':movingOutDirection == 'Down' && prevSelectedLevel == level.level}" ng-click="showLevel(level.level)" aria-label="{{ level.level }}层">
-                    <span ng-include="'images/maps/level-' + level.level + '.svg'"></span>
+                    <span ng-include="'/assets/images/maps/level-' + level.level + '.svg'"></span>
                     <div class="level-pins" ng-class="{'level-pins-active':selectedLevel == level.level && showingPins}">
                         <a ng-repeat="target in targets" ng-if="target.level == level.level" class="pin pin-{{ level.level }}-{{ target.id }}" ng-class="{'pin-active':selectedTarget.id == target.id}" data-category="{{ target.category }}" data-space="{{ target.space }}" aria-label="{{ target.name }}" ng-click="openContent(target)" ng-style="{top:target.y + 'vmin'}">
                             <span class="pin-icon">

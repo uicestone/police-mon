@@ -302,7 +302,7 @@
     }
 
     function SubheaderDemo($scope) {
-        var imagePath = 'images/g1.jpg';
+        var imagePath = 'assets/images/g1.jpg';
         $scope.messages = [
             {
                 face : imagePath,

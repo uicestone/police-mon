@@ -11,11 +11,12 @@
                 <div class="panel-body padding-xl form-validation" data-ng-controller="MaterialLoginCtrl" ng-cloak>
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-3">
-                            <form name="material_login_form" class="form-horizontal form-validation" data-ng-submit="submitForm()">
+
+                            <form name="material_login_form" class="md-form-login form-validation" data-ng-submit="submitForm()">
                                 <fieldset>
                                     <md-input-container class="md-block">
                                         <label>Email</label>
-                                        <md-icon class="zmdi zmdi-account-o"></md-icon>
+                                        <md-icon class="material-icons">mail_outline</md-icon>
                                         <input required 
                                                type="email"
                                                name="email" 
@@ -27,10 +28,9 @@
                                         </div>
                                     </md-input-container>
 
-                                    <div class="divider divider-md"></div>
                                     <md-input-container class="md-block">
                                         <label>Password</label>
-                                        <md-icon class="zmdi zmdi-lock-outline"></md-icon>
+                                        <md-icon class="material-icons">lock_outline</md-icon>
                                         <input required 
                                                type="password"
                                                name="password" 
@@ -55,6 +55,7 @@
                                     <div class="alert alert-info" data-ng-show="showInfoOnSubmit">This is just for demo. In real project, you will submit form with AJAX :)</div>
                                 </fieldset>
                             </form>
+
                         </div>
                     </div>
                 </div>                
@@ -73,11 +74,12 @@
                 <div class="panel-body padding-xl" data-ng-controller="MaterialSignUpCtrl">
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-3">
-                            <form name="material_signup_form" class="form-horizontal form-validation" data-ng-submit="submitForm()">
+
+                            <form name="material_signup_form" class="form-validation" data-ng-submit="submitForm()">
                                 <fieldset>
                                     <md-input-container class="md-block">
                                         <label>Username</label>
-                                        <md-icon class="zmdi zmdi-account"></md-icon>
+                                        <md-icon class="material-icons">perm_identity</md-icon>
                                         <input required 
                                                type="text"
                                                name="name" 
@@ -88,10 +90,9 @@
                                         </div>
                                     </md-input-container>
 
-                                    <div class="divider divider-md"></div>
                                     <md-input-container class="md-block">
                                         <label>Email</label>
-                                        <md-icon class="zmdi zmdi-email"></md-icon>
+                                        <md-icon class="material-icons">mail_outline</md-icon>
                                         <input required 
                                                type="email"
                                                name="email" 
@@ -103,10 +104,9 @@
                                         </div>
                                     </md-input-container>
 
-                                    <div class="divider divider-md"></div>
                                     <md-input-container class="md-block">
                                         <label>Password</label>
-                                        <md-icon class="zmdi zmdi-lock"></md-icon>
+                                        <md-icon class="material-icons">lock_outline</md-icon>
                                         <input required 
                                                type="password"
                                                name="password" 
@@ -116,8 +116,11 @@
                                         </div>
                                     </md-input-container>                                        
                                     <md-button type="submit"
-                                               class="md-raised btn-w-md md-primary btn-block btn-lg"
+                                               class="md-raised btn-w-md md-primary btn-w-md"
                                                data-ng-disabled="!canSubmit()">Sign Up</md-button>
+                                    <md-button class="btn-w-md"
+                                               data-ng-disabled="!canRevert()"
+                                               data-ng-click="revert()">Revert</md-button>
 
                                     <div class="divider"></div>
                                     <div class="callout callout-info">
@@ -127,6 +130,8 @@
                                     <div class="alert alert-info" data-ng-show="showInfoOnSubmit">This is just for demo. In real project, you will submit form with AJAX :)</div>
                                 </fieldset>
                             </form>
+
+
                         </div>
                     </div>
                 </div>

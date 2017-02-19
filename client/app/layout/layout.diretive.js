@@ -2,7 +2,39 @@
     'use strict';
 
     angular.module('app.layout')
+        // quickview
+        .directive('toggleQuickview', toggleQuickview)
+
         .directive('uiPreloader', ['$rootScope', uiPreloader]);
+
+    function toggleQuickview() {
+        var directive = {
+            restrict: 'A',
+            link: link
+        };
+
+        return directive;
+
+        function link(scope, el, attrs) {
+            var $el = $(el[0]);
+            // #app not #body
+            var $body = $('#app');
+
+            $el.on('click', function(e) {
+                var qvClass = 'quickview-open';
+
+                if (attrs.target) {
+                    var qvClass = qvClass + '-' + attrs.target;
+                }
+
+                // CSS class on body instead of #quickview
+                // because before ng-include load quickview.html, you'll fail to get $('#')
+                $body.toggleClass(qvClass);
+                e.preventDefault();
+            });
+
+        }
+    }
 
     function uiPreloader($rootScope) {
         return {
