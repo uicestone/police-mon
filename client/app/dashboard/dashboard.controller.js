@@ -71,16 +71,16 @@
             }]
         };
 
-        $scope.roomUsage = {};
-        $scope.roomUsage.options = {
+        $scope.countTotal = {};
+        $scope.countTotal.options = {
             title: {
-                text: '办案区使用率'
+                text: '全员门急诊总量同环比分析'
             },
             tooltip : {
                 trigger: 'axis'
             },
             legend: {
-                data:['等候室','讯询问室','看管等候室','醒酒室','人身安全检查室']
+                data:['同比','环比']
             },
             grid: {
                 left: '3%',
@@ -92,55 +92,149 @@
                 {
                     type : 'category',
                     boundaryGap : false,
-                    data : ['1/12','1/13','1/14','1/15','1/16','1/17','1/18']
+                    data : ['2016/01','2016/02','2016/03','2016/04','2016/05','2016/06','2016/07','2016/08','2016/09']
                 }
             ],
             yAxis : [
                 {
-                    type : 'value'
-                }
+                    type : 'value',
+                    axisLabel: {
+                        formatter: function(value) {
+                            return (value * 100).toFixed(1) + '%'
+                        }
+                    }
+                },
             ],
             series : [
                 {
-                    name:'等候室',
+                    name:'同比',
                     type:'line',
-                    stack: '总量',
-                    areaStyle: {normal: {}},
-                    data:[120, 132, 101, 134, 90, 230, 210]
-                },
-                {
-                    name:'讯询问室',
-                    type:'line',
-                    stack: '总量',
-                    areaStyle: {normal: {}},
-                    data:[220, 182, 191, 234, 290, 330, 310]
-                },
-                {
-                    name:'看管等候室',
-                    type:'line',
-                    stack: '总量',
-                    areaStyle: {normal: {}},
-                    data:[150, 232, 201, 154, 190, 330, 410]
-                },
-                {
-                    name:'醒酒室',
-                    type:'line',
-                    stack: '总量',
-                    areaStyle: {normal: {}},
-                    data:[320, 332, 301, 334, 390, 330, 320]
-                },
-                {
-                    name:'人身安全检查室',
-                    type:'line',
-                    stack: '总量',
-                    label: {
-                        normal: {
-                            show: true,
-                            position: 'top'
+                    data:[0.143686134,0.311108823,0.344196973,0.218641317,0.288048693,0.221174125,0.094098023,0.181481202,0.031431328],
+                    markPoint: {
+                        data: [
+                            {name: '最低', type: 'min'},
+                            {name: '最高', type: 'max'}
+                        ],
+                        label: {
+                            normal: {
+                                formatter: function(point) {
+                                    return (point.value * 100).toFixed(0) + '%'
+                                }
+                            }
                         }
                     },
-                    areaStyle: {normal: {}},
-                    data:[820, 932, 901, 934, 1290, 1330, 1320]
+                    markLine: {
+                        data: [
+                            {type: 'average', name: '平均值'}
+                        ]
+                    }
+                },
+                {
+                    name:'环比',
+                    type:'line',
+                    data:[-0.150014413,-0.169473176,0.419857399,-0.127953278,0.089776763,-0.016073465,0.031962336,0.077809237,-0.147393834],
+                    markPoint: {
+                        data: [
+                            {name: '最低', type: 'min'},
+                            {name: '最高', type: 'max'}
+                        ],
+                        label: {
+                            normal: {
+                                formatter: function(point) {
+                                    return (point.value * 100).toFixed(0) + '%'
+                                }
+                            }
+                        }
+                    },
+                    markLine: {
+                        data: [
+                            {type: 'average', name: '平均值'}
+                        ]
+                    }
+                }
+            ]
+        };
+
+        $scope.countMenzhen = {};
+        $scope.countMenzhen.options = {
+            title: {
+                text: '全员门急诊总量同环比分析'
+            },
+            tooltip : {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['同比','环比']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : ['2016/01','2016/02','2016/03','2016/04','2016/05','2016/06','2016/07','2016/08','2016/09']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLabel: {
+                        formatter: function(value) {
+                            return (value * 100).toFixed(1) + '%'
+                        }
+                    }
+                },
+            ],
+            series : [
+                {
+                    name:'同比',
+                    type:'line',
+                    data:[0.143686134,0.311108823,0.344196973,0.218641317,0.288048693,0.221174125,0.094098023,0.181481202,0.031431328],
+                    markPoint: {
+                        data: [
+                            {name: '最低', type: 'min'},
+                            {name: '最高', type: 'max'}
+                        ],
+                        label: {
+                            normal: {
+                                formatter: function(point) {
+                                    return (point.value * 100).toFixed(0) + '%'
+                                }
+                            }
+                        }
+                    },
+                    markLine: {
+                        data: [
+                            {type: 'average', name: '平均值'}
+                        ]
+                    }
+                },
+                {
+                    name:'环比',
+                    type:'line',
+                    data:[-0.150014413,-0.169473176,0.419857399,-0.127953278,0.089776763,-0.016073465,0.031962336,0.077809237,-0.147393834],
+                    markPoint: {
+                        data: [
+                            {name: '最低', type: 'min'},
+                            {name: '最高', type: 'max'}
+                        ],
+                        label: {
+                            normal: {
+                                formatter: function(point) {
+                                    return (point.value * 100).toFixed(0) + '%'
+                                }
+                            }
+                        }
+                    },
+                    markLine: {
+                        data: [
+                            {type: 'average', name: '平均值'}
+                        ]
+                    }
                 }
             ]
         };
