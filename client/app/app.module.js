@@ -11,7 +11,6 @@
         ,'app.ui.form'
         ,'app.ui.form.validation'
         ,'app.page'
-        ,'app.station'
         ,'app.table'
         
         // 3rd party feature modules
