@@ -33,15 +33,19 @@
             });
 
             $urlRouterProvider
-                .when('', '/dashboard')
-                .when('/', '/dashboard')
+                .when('', '/dashboard-count')
+                .when('/', '/dashboard-count')
                 .otherwise('/page/404');
 
-            $stateProvider.state('dashboard', {
-                url: '/dashboard',
-                templateUrl: 'app/dashboard/dashboard.html'
+            $stateProvider.state('dashboard-count', {
+                url: '/dashboard-count',
+                templateUrl: 'app/dashboard/dashboard-count.html'
             });
 
+            $stateProvider.state('dashboard-charge', {
+                url: '/dashboard-charge',
+                templateUrl: 'app/dashboard/dashboard-charge.html'
+            });
         }]
     );
 
