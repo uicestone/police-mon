@@ -24,8 +24,8 @@
         var date = new Date();
         var year = date.getFullYear();
         var main = {
-            brand: 'PoliceMon',
-            name: '王警官',
+            brand: 'HospitalMon',
+            name: '王医生',
             year: year,
             layout: 'wide',                                 // String: 'boxed', 'wide'
             menu: 'vertical',                               // String: 'horizontal', 'vertical'
