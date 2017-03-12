@@ -124,6 +124,9 @@ gulp.task('copy', function() {
 gulp.task('optimize', ['inject', 'sass-min'], function() {
     log('Optimizing the js, css, html');
 
+    var jsFilter = $.filter('client/scripts/*.js', { restore: true });
+    var indexHtmlFilter = $.filter(['client/scripts/*.js', 'client/styles/*.css', '!**/index.html'], { restore: true });
+
     return gulp
         .src(config.index)
         .pipe($.plumber({errorHandler: swallowError}))
