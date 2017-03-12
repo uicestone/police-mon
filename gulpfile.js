@@ -128,7 +128,15 @@ gulp.task('optimize', ['inject', 'sass-min'], function() {
         .src(config.index)
         .pipe($.plumber({errorHandler: swallowError}))
         .pipe($.useref())
+        .pipe(jsFilter)
         .pipe($.if('scripts/app.js', $.uglify()))
+        // .pipe($.replace(/http:\/\/localhost/g, 'http://stirad.com'))
+        .pipe(jsFilter.restore)
+        .pipe($.replace(/\.html(?=[\'\"])/g, '.html?v=' + (new Date()).getTime()))
+        .pipe(indexHtmlFilter)
+        .pipe($.rev())                // Rename the concatenated files (but not index.html)
+        .pipe(indexHtmlFilter.restore)
+        .pipe($.revReplace())         // Substitute in new filenames
         .pipe(gulp.dest( config.dist ));
 
 });
@@ -139,11 +147,11 @@ gulp.task('serve', ['inject', 'sass'], function() {
 });
 
 gulp.task('build', ['optimize', 'copy'], function() {
-    startBrowserSync('dist');
+    
 })
 
 gulp.task('serve-dist', function() {
-    gulp.run('build');
+    startBrowserSync('dist');
 })
 
 gulp.task('serve-docs', ['jade-docs'], function() {
