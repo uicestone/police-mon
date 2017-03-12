@@ -1,9 +1,9 @@
 {
-  "name": "PoliceMon",
-  "description": "霆普办案区人员管理系统",
+  "name": "hospital-mon",
+  "description": "医院门急诊统计分析系统",
   "version": "1.0.0",
   "license": "MIT",
-  "repository": "https://github.com/uicestone/PoliceMon",
+  "repository": "https://github.com/uicestone/HospitalMon",
   "scripts": {
     "init": "npm install"
   },

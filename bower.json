@@ -1,6 +1,6 @@
 {
-  "name": "material",
-  "version": "1.3.0",
+  "name": "hospital-mon",
+  "version": "1.0.0",
   "dependencies": {
     "jquery": "^2.2.4",
     "angular": "~1.6.0",
