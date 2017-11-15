@@ -70,6 +70,11 @@
 
         <ul class="nav-right pull-right list-unstyled">
             <li>
+                <li>
+                    <md-switch aria-label="Bluetooth" ng-model="$parent.bluetoothEnabled" ng-click="enableBluetooth()">
+                        <i class="zmdi zmdi-bluetooth"></i>
+                    </md-switch>
+                </li>
                 <md-menu md-position-mode="target-right target">
                     <md-button class="header-btn" aria-label="menu" ng-click="$mdOpenMenu($event)">
                         <img src="assets/images/g1.jpg" alt="" class="img-circle img30_30">
